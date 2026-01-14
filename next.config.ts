@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    unoptimized: true,
+    unoptimized: true, // Required for Cloudflare Pages
   },
 };
 
