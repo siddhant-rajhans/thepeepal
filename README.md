@@ -9,7 +9,7 @@ This scaffold provides a robust foundation built with:
 ### 🎯 Core Framework
 - **⚡ Next.js 15** - The React framework for production with App Router
 - **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+- **🎨 Tailwind CSS 3** - Utility-first CSS framework for rapid UI development (v3 for Cloudflare Pages compatibility)
 
 ### 🧩 UI Components & Styling
 - **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
