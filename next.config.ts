@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: "export", // Use static export for Cloudflare Pages
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,
