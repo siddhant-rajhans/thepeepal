@@ -14,24 +14,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "The Peepal - Eco-Friendly Farm Stay in Nashik",
+  description: "Experience blissful natural earthen homes at The Peepal. Contributing to eco-friendly Bharat with sustainable mud villas, organic farming, and traditional farm-to-table dining in Nashik, Maharashtra.",
+  keywords: ["The Peepal", "Farm Stay Nashik", "Eco-Friendly Accommodation", "Mud House", "Sustainable Living", "Organic Farming", "Weekend Getaway Nashik", "Maharashtra Tourism"],
+  authors: [{ name: "The Peepal" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: [
+      { url: "/favicon-for-app/favicon.ico" },
+      { url: "/favicon-for-app/icon1.png", sizes: "any", type: "image/png" },
+      { url: "/favicon-for-app/icon0.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/favicon-for-app/apple-icon.png" },
+    ],
   },
+  manifest: "/favicon-for-app/manifest.json",
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "The Peepal - Eco-Friendly Farm Stay",
+    description: "Experience blissful natural earthen homes and sustainable living in Nashik",
+    url: "https://thepeepal.pages.dev",
+    siteName: "The Peepal",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "The Peepal - Eco-Friendly Farm Stay",
+    description: "Experience blissful natural earthen homes and sustainable living in Nashik",
   },
 };
 
