@@ -2,13 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Leaf, Utensils, Wheat, MapPin, Clock, Sun, Trees, Building2, Users, CheckCircle, Menu, X, Heart, Instagram, Image as ImageIcon, Phone, MessageCircle } from 'lucide-react';
+import { Leaf, Utensils, Wheat, MapPin, Clock, Sun, Trees, Building2, Users, CheckCircle, Menu, X, Heart, Instagram, Image as ImageIcon, Phone, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<{ url: string; name: string } | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const totalImages = 20;
 
   // Placeholder images
   const placeholderImages = [
@@ -23,7 +24,10 @@ export default function Home() {
   const whatsappNumber = '919420479673';
   const whatsappMessage = encodeURIComponent('Hi! I would like to book a stay at The Peepal Farm Stay.');
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappNumber2 = '919561590211';
+  const whatsappLink2 = `https://wa.me/${whatsappNumber2}?text=${whatsappMessage}`;
   const phoneNumber = '+91 94204 79673';
+  const phoneNumber2 = '+91 95615 90211';
   const locationLink = 'https://maps.app.goo.gl/2fS42WFUXTYc91Aj6';
 
   useEffect(() => {
@@ -33,7 +37,22 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      
+      if (e.key === 'ArrowLeft') {
+        setLightboxIndex((prev) => (prev! > 1 ? prev! - 1 : totalImages));
+      } else if (e.key === 'ArrowRight') {
+        setLightboxIndex((prev) => (prev! < totalImages ? prev! + 1 : 1));
+      } else if (e.key === 'Escape') {
+        setLightboxIndex(null);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, totalImages]);
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -105,10 +124,58 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-green-600 via-emerald-700 to-teal-800">
           <div className="absolute inset-0 bg-black/20"></div>
         </div>
+        
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <div className="mb-8 flex justify-center">
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-              <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain" />
+            <div className="relative group">
+              {/* Animated rotating gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 rounded-[2.5rem] blur-3xl opacity-75 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-tl from-lime-400 via-green-500 to-emerald-600 rounded-[2.5rem] blur-2xl opacity-60 animate-pulse" style={{ animationDelay: '1s' }}></div>
+              
+              {/* Main container with 3D transform */}
+              <div className="relative bg-gradient-to-br from-green-50 via-emerald-100 to-teal-50 rounded-[2rem] p-12 shadow-2xl transform perspective-1000 group-hover:scale-110 group-hover:rotate-y-6 transition-all duration-700 ease-out"
+                   style={{ 
+                     boxShadow: '0 25px 50px -12px rgba(34, 197, 94, 0.4), 0 0 0 1px rgba(34, 197, 94, 0.1), inset 0 2px 4px 0 rgba(255, 255, 255, 0.6)'
+                   }}>
+                
+                {/* Top shine effect */}
+                <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-60"></div>
+                
+                {/* Floating particles effect */}
+                <div className="absolute -top-2 -left-2 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-75"></div>
+                <div className="absolute -top-1 -right-3 w-2 h-2 bg-emerald-400 rounded-full animate-ping opacity-75" style={{ animationDelay: '0.5s' }}></div>
+                <div className="absolute -bottom-2 -left-3 w-2.5 h-2.5 bg-teal-400 rounded-full animate-ping opacity-75" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute -bottom-1 -right-2 w-2 h-2 bg-lime-400 rounded-full animate-ping opacity-75" style={{ animationDelay: '1.5s' }}></div>
+                
+                {/* Inner frame with gradient border */}
+                <div className="relative bg-gradient-to-br from-white via-green-50 to-emerald-50 rounded-[1.5rem] p-3 shadow-inner backdrop-blur-sm"
+                     style={{ 
+                       boxShadow: 'inset 0 2px 8px 0 rgba(34, 197, 94, 0.2), inset 0 0 0 1px rgba(34, 197, 94, 0.1)'
+                     }}>
+                  
+                  {/* Logo with glow effect */}
+                  <div className="relative">
+                    <img 
+                      src="/PHOTO-2026-01-14-21-10-59.jpg" 
+                      alt="The Peepal Logo" 
+                      className="w-36 h-36 md:w-44 md:h-44 object-contain drop-shadow-2xl relative z-10"
+                      style={{ filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.3))' }}
+                    />
+                    
+                    {/* Radial glow behind logo */}
+                    <div className="absolute inset-0 bg-gradient-radial from-green-400/30 via-emerald-400/20 to-transparent blur-xl"></div>
+                  </div>
+                </div>
+                
+                {/* Bottom 3D shadow for depth */}
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-4/5 h-8 bg-gradient-to-b from-green-600/40 to-transparent rounded-full blur-2xl"></div>
+              </div>
+              
+              {/* Orbiting decorative elements */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full opacity-60 blur-sm animate-bounce"></div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-gradient-to-br from-teal-400 to-green-500 rounded-full opacity-60 blur-sm animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+              </div>
             </div>
           </div>
 
@@ -315,40 +382,66 @@ export default function Home() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">Discover the beauty of our farm stay</p>
           </div>
 
-          <div className="relative">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 blur-lg">
-              {placeholderImages.map((image, index) => (
-                <div key={index} className="group relative overflow-hidden rounded-2xl shadow-lg bg-gradient-to-br from-amber-100 to-orange-100">
-                  <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-amber-200 to-orange-200">
-                    <div className="text-center">
-                      <ImageIcon className="w-16 h-16 text-amber-600 mx-auto mb-2" />
-                      <p className="text-amber-800 font-medium">{image.name}</p>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((num) => (
+              <div 
+                key={num} 
+                onClick={() => setLightboxIndex(num)}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+              >
+                <div className="aspect-video overflow-hidden bg-gray-100">
+                  <img 
+                    src={`/assets/1000236050_convert_${num}.png`}
+                    alt={`The Peepal Farm Stay Gallery Image ${num}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                 </div>
-              ))}
-            </div>
-
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center bg-white/95 backdrop-blur-sm rounded-3xl p-12 shadow-2xl max-w-2xl mx-4 border-2 border-amber-300">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-amber-100 rounded-full mb-6">
-                  <MapPin className="w-10 h-10 text-amber-700" />
-                </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                  We know you can&apos;t wait to see!
-                </h3>
-                <p className="text-xl text-gray-600 mb-6">
-                  Check out Google Maps for spoilers 👀
+              </div>
+            ))}
+          </div>
+          
+          {/* Lightbox Modal */}
+          {lightboxIndex !== null && (
+            <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
+              <button
+                onClick={() => setLightboxIndex(null)}
+                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+              >
+                <X className="w-8 h-8" />
+              </button>
+              
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex((prev) => (prev! > 1 ? prev! - 1 : totalImages));
+                }}
+                className="absolute left-4 text-white hover:text-gray-300 transition-colors z-10"
+              >
+                <ChevronLeft className="w-12 h-12" />
+              </button>
+              
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex((prev) => (prev! < totalImages ? prev! + 1 : 1));
+                }}
+                className="absolute right-4 text-white hover:text-gray-300 transition-colors z-10"
+              >
+                <ChevronRight className="w-12 h-12" />
+              </button>
+              
+              <div className="max-w-7xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
+                <img
+                  src={`/assets/1000236050_convert_${lightboxIndex}.png`}
+                  alt={`The Peepal Farm Stay Gallery Image ${lightboxIndex}`}
+                  className="w-full h-full object-contain"
+                />
+                <p className="text-white text-center mt-4 text-lg">
+                  Image {lightboxIndex} of {totalImages}
                 </p>
-                <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  <a href={locationLink} target="_blank" rel="noopener noreferrer">
-                    <MapPin className="w-5 h-5 mr-2" />
-                    View on Google Maps
-                  </a>
-                </Button>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -593,28 +686,6 @@ export default function Home() {
         </div>
       </section>
 
-      {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
-          <div className="relative max-w-7xl mx-auto p-4">
-            <button onClick={() => setSelectedImage(null)} className="absolute -top-4 -right-4 z-10 text-white hover:text-gray-300 transition-colors" aria-label="Close lightbox">
-              <X className="w-8 h-8" />
-            </button>
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-amber-200 to-orange-200">
-                <div className="text-center">
-                  <ImageIcon className="w-24 h-24 text-amber-600 mx-auto mb-4" />
-                  <p className="text-amber-800 text-2xl font-bold">{selectedImage.name}</p>
-                </div>
-              </div>
-              <div className="p-6 bg-white">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">{selectedImage.name}</h3>
-                <p className="text-gray-600">Beautiful moment from Farm Stay Nashik</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <footer className="mt-auto bg-gray-900 text-white py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
@@ -641,10 +712,20 @@ export default function Home() {
                     <Phone className="w-5 h-5" />
                     <span className="font-medium">{phoneNumber}</span>
                   </a>
+                  
+                  <a href={`tel:${phoneNumber2}`} className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <Phone className="w-5 h-5" />
+                    <span className="font-medium">{phoneNumber2}</span>
+                  </a>
 
                   <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
                     <MessageCircle className="w-5 h-5" />
-                    <span className="font-medium">Chat on WhatsApp</span>
+                    <span className="font-medium">WhatsApp: {phoneNumber}</span>
+                  </a>
+                  
+                  <a href={whatsappLink2} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="font-medium">WhatsApp: {phoneNumber2}</span>
                   </a>
                 </div>
               </div>

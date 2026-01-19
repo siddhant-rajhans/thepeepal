@@ -77,3 +77,114 @@
     color: hsl(var(--foreground));
   }
 }
+
+@layer utilities {
+  /* Bird flying animations - horizontal flight with natural flapping */
+  @keyframes fly-across-1 {
+    0% {
+      left: -10%;
+      transform: translateY(-15px) scale(1, 1) rotate(-5deg);
+    }
+    10% {
+      transform: translateY(-20px) scale(1.15, 0.85) rotate(0deg);
+    }
+    20% {
+      transform: translateY(-15px) scale(1, 1) rotate(5deg);
+    }
+    30% {
+      transform: translateY(-20px) scale(1.15, 0.85) rotate(0deg);
+    }
+    40% {
+      transform: translateY(-15px) scale(1, 1) rotate(-5deg);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.15, 0.85) rotate(0deg);
+    }
+    60% {
+      transform: translateY(-15px) scale(1, 1) rotate(5deg);
+    }
+    70% {
+      transform: translateY(-20px) scale(1.15, 0.85) rotate(0deg);
+    }
+    80% {
+      transform: translateY(-15px) scale(1, 1) rotate(-5deg);
+    }
+    90% {
+      transform: translateY(-20px) scale(1.15, 0.85) rotate(0deg);
+    }
+    100% {
+      left: 110%;
+      transform: translateY(-15px) scale(1, 1) rotate(5deg);
+    }
+  }
+  
+  @keyframes fly-across-2 {
+    0% {
+      left: -10%;
+      transform: translateY(15px) scale(1, 1) rotate(5deg);
+    }
+    12% {
+      transform: translateY(8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    24% {
+      transform: translateY(15px) scale(1, 1) rotate(-5deg);
+    }
+    36% {
+      transform: translateY(8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    48% {
+      transform: translateY(15px) scale(1, 1) rotate(5deg);
+    }
+    60% {
+      transform: translateY(8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    72% {
+      transform: translateY(15px) scale(1, 1) rotate(-5deg);
+    }
+    84% {
+      transform: translateY(8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    96% {
+      transform: translateY(15px) scale(1, 1) rotate(5deg);
+    }
+    100% {
+      left: 110%;
+      transform: translateY(15px) scale(1, 1) rotate(-5deg);
+    }
+  }
+  
+  @keyframes fly-across-3 {
+    0% {
+      left: -10%;
+      transform: translateY(0px) scale(1, 1) rotate(-3deg);
+    }
+    11% {
+      transform: translateY(-8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    22% {
+      transform: translateY(0px) scale(1, 1) rotate(3deg);
+    }
+    33% {
+      transform: translateY(-8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    44% {
+      transform: translateY(0px) scale(1, 1) rotate(-3deg);
+    }
+    55% {
+      transform: translateY(-8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    66% {
+      transform: translateY(0px) scale(1, 1) rotate(3deg);
+    }
+    77% {
+      transform: translateY(-8px) scale(1.15, 0.85) rotate(0deg);
+    }
+    88% {
+      transform: translateY(0px) scale(1, 1) rotate(-3deg);
+    }
+    100% {
+      left: 110%;
+      transform: translateY(0px) scale(1, 1) rotate(3deg);
+    }
+  }
+}
