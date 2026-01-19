@@ -1,0 +1,275 @@
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.10:3000
+
+ ✓ Starting...
+ ✓ Ready in 1272ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1649ms (810 modules)
+
+<--- Last few GCs --->
+
+[19235:0x88280c000]    26088 ms: Mark-Compact 4089.5 (4106.2) -> 4085.1 (4105.3) MB, pooled: 2 MB, 345.71 / 0.00 ms  (average mu = 0.070, current mu = 0.026) allocation failure; scavenge might not succeed
+[19235:0x88280c000]    26496 ms: Mark-Compact 4085.1 (4105.3) -> 4085.1 (4105.6) MB, pooled: 1 MB, 337.71 / 0.00 ms  (average mu = 0.124, current mu = 0.171) allocation failure; GC in old space requested
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x104bf1f0c node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 2: 0x104d9dca4 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 3: 0x104f5ace8 v8::internal::Heap::CallGCPrologueCallbacks(v8::GCType, v8::GCCallbackFlags, v8::internal::GCTracer::Scope::ScopeId) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 4: 0x104f60780 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags)::$_1::operator()() const [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 5: 0x104f5b02c void heap::base::Stack::SetMarkerAndCallbackImpl<v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags)::$_1>(heap::base::Stack*, void*, void const*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 6: 0x104b04028 PushAllRegistersAndIterateStack [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 7: 0x104f57f14 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 8: 0x104f51968 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+ 9: 0x104f52330 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+10: 0x104f49238 v8::internal::Factory::NewTransitionArray(int, int) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+11: 0x10512f798 v8::internal::Map::ConnectTransition(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Name>, v8::internal::TransitionKindFlag, bool) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+12: 0x10512ef6c v8::internal::Map::CopyReplaceDescriptors(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::DescriptorArray>, v8::internal::TransitionFlag, v8::internal::MaybeHandle<v8::internal::Name>, char const*, v8::internal::TransitionKindFlag) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+13: 0x10512edb8 v8::internal::Map::CopyAddDescriptor(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Map>, v8::internal::Descriptor*, v8::internal::TransitionFlag) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+14: 0x10512ead4 v8::internal::Map::CopyWithField(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Name>, v8::internal::Handle<v8::internal::FieldType>, v8::internal::PropertyAttributes, v8::internal::PropertyConstness, v8::internal::Representation, v8::internal::TransitionFlag) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+15: 0x10513321c v8::internal::Map::TransitionToDataProperty(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Name>, v8::internal::Handle<v8::internal::Object>, v8::internal::PropertyAttributes, v8::internal::PropertyConstness, v8::internal::StoreOrigin) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+16: 0x105128ee8 v8::internal::LookupIterator::PrepareTransitionToDataProperty(v8::internal::Handle<v8::internal::JSReceiver>, v8::internal::Handle<v8::internal::Object>, v8::internal::PropertyAttributes, v8::internal::StoreOrigin) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+17: 0x1051494e8 v8::internal::Object::TransitionAndWriteDataProperty(v8::internal::LookupIterator*, v8::internal::Handle<v8::internal::Object>, v8::internal::PropertyAttributes, v8::Maybe<v8::internal::ShouldThrow>, v8::internal::StoreOrigin) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+18: 0x105149250 v8::internal::Object::AddDataProperty(v8::internal::LookupIterator*, v8::internal::Handle<v8::internal::Object>, v8::internal::PropertyAttributes, v8::Maybe<v8::internal::ShouldThrow>, v8::internal::StoreOrigin, v8::internal::EnforceDefineSemantics) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+19: 0x10520ccf4 v8::internal::Runtime::SetObjectProperty(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, v8::internal::MaybeHandle<v8::internal::Object>, v8::internal::StoreOrigin, v8::Maybe<v8::internal::ShouldThrow>) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+20: 0x10520dc78 v8::internal::Runtime_SetKeyedProperty(int, unsigned long*, v8::internal::Isolate*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+21: 0x1049e39f4 Builtins_CEntry_Return1_ArgvOnStack_NoBuiltinExit [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+22: 0x111c83f04 
+23: 0x1124e887c 
+24: 0x11247d360 
+25: 0x1124f4878 
+26: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+27: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+28: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+29: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+30: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+31: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+32: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+33: 0x111c86330 
+34: 0x111dc727c 
+35: 0x1124f4924 
+36: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+37: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+38: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+39: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+40: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+41: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+42: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+43: 0x111c86330 
+44: 0x111e2eba0 
+45: 0x1124f3fac 
+46: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+47: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+48: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+49: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+50: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+51: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+52: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+53: 0x111c86330 
+54: 0x111e2eba0 
+55: 0x1124eb1ac 
+56: 0x111c85808 
+57: 0x111e2eba0 
+58: 0x1124f3fac 
+59: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+60: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+61: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+62: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+63: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+64: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+65: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+66: 0x111c86330 
+67: 0x111dc727c 
+68: 0x1124f3bc4 
+69: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+70: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+71: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+72: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+73: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+74: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+75: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+76: 0x111c86330 
+77: 0x111e2eba0 
+78: 0x1124eb1ac 
+79: 0x111c85808 
+80: 0x111e2eba0 
+81: 0x1124f3fac 
+82: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+83: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+84: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+85: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+86: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+87: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+88: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+89: 0x111c86330 
+90: 0x111dc727c 
+91: 0x1124f3bc4 
+92: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+93: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+94: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+95: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+96: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+97: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+98: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+99: 0x111c86330 
+100: 0x111e2eba0 
+101: 0x1124eb1ac 
+102: 0x111c85808 
+103: 0x111e2eba0 
+104: 0x1124f3fac 
+105: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+106: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+107: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+108: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+109: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+110: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+111: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+112: 0x111c86330 
+113: 0x111e2eba0 
+114: 0x1124eb1ac 
+115: 0x111c85808 
+116: 0x111e2eba0 
+117: 0x1124f3fac 
+118: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+119: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+120: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+121: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+122: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+123: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+124: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+125: 0x111c86330 
+126: 0x111e2eba0 
+127: 0x1124f3fac 
+128: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+129: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+130: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+131: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+132: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+133: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+134: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+135: 0x111c86330 
+136: 0x111e2eba0 
+137: 0x1124eb1ac 
+138: 0x111c85808 
+139: 0x111e2eba0 
+140: 0x1124f3fac 
+141: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+142: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+143: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+144: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+145: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+146: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+147: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+148: 0x111c86330 
+149: 0x111dc727c 
+150: 0x1124f3bc4 
+151: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+152: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+153: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+154: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+155: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+156: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+157: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+158: 0x111c86330 
+159: 0x111e2eba0 
+160: 0x1124f3fac 
+161: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+162: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+163: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+164: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+165: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+166: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+167: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+168: 0x111c86330 
+169: 0x111e2eba0 
+170: 0x1124f3fac 
+171: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+172: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+173: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+174: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+175: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+176: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+177: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+178: 0x111c86330 
+179: 0x111e2eba0 
+180: 0x1124eb1ac 
+181: 0x111c85808 
+182: 0x111e2eba0 
+183: 0x1124f3fac 
+184: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+185: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+186: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+187: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+188: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+189: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+190: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+191: 0x111c86330 
+192: 0x111e2eba0 
+193: 0x1124eb1ac 
+194: 0x111c85808 
+195: 0x111e2eba0 
+196: 0x1124f3fac 
+197: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+198: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+199: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+200: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+201: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+202: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+203: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+204: 0x111c86330 
+205: 0x111e2eba0 
+206: 0x1124eb1ac 
+207: 0x111c85808 
+208: 0x111e2eba0 
+209: 0x1124f3fac 
+210: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+211: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+212: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+213: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+214: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+215: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+216: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+217: 0x111c86330 
+218: 0x111e2eba0 
+219: 0x1124f3fac 
+220: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+221: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+222: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+223: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+224: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+225: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+226: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+227: 0x111c86330 
+228: 0x111e2eba0 
+229: 0x1124eb1ac 
+230: 0x111c85808 
+231: 0x111e2eba0 
+232: 0x1124f3fac 
+233: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+234: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+235: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+236: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+237: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+238: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+239: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+240: 0x111c86330 
+241: 0x111dc727c 
+242: 0x1124f3bc4 
+243: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+244: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+245: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+246: 0x104ecf570 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+247: 0x104db47e4 v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+248: 0x10527138c void v8_inspector::V8Console::call<&v8_inspector::V8Console::runTask(v8::FunctionCallbackInfo<v8::Value> const&)>(v8::FunctionCallbackInfo<v8::Value> const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+249: 0x10494eaac Builtins_CallApiCallbackOptimizedNoProfiling [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+250: 0x111c86330 
+251: 0x111e2eba0 
+252: 0x1124f3fac 
+253: 0x10494a50c Builtins_JSEntryTrampoline [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+254: 0x10494a1b0 Builtins_JSEntry [/opt/homebrew/Cellar/node/23.11.0/bin/node]
+255: 0x104ecfc08 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/opt/homebrew/Cellar/node/23.11.0/bin/node]

@@ -2,8 +2,9 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Leaf, Utensils, Wheat, MapPin, Clock, Sun, Trees, Building2, Users, CheckCircle, Menu, X, Heart, Instagram, Image as ImageIcon, Phone, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Leaf, Utensils, Wheat, MapPin, Clock, Sun, Trees, Building2, Users, CheckCircle, Menu, X, Heart, Instagram, Image as ImageIcon, Phone, MessageCircle, ChevronLeft, ChevronRight, Home as HomeIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -379,7 +380,7 @@ export default function Home() {
               <ImageIcon className="w-8 h-8 text-amber-700" />
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Photo Gallery</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Discover the beauty of our farm stay</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Discover the beauty of our farm stay and live like locals</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -389,11 +390,14 @@ export default function Home() {
                 onClick={() => setLightboxIndex(num)}
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
               >
-                <div className="aspect-video overflow-hidden bg-gray-100">
-                  <img 
+                <div className="aspect-video overflow-hidden bg-gray-100 relative">
+                  <Image 
                     src={`/assets/1000236050_convert_${num}.png`}
                     alt={`The Peepal Farm Stay Gallery Image ${num}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -430,12 +434,16 @@ export default function Home() {
                 <ChevronRight className="w-12 h-12" />
               </button>
               
-              <div className="max-w-7xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
-                <img
-                  src={`/assets/1000236050_convert_${lightboxIndex}.png`}
-                  alt={`The Peepal Farm Stay Gallery Image ${lightboxIndex}`}
-                  className="w-full h-full object-contain"
-                />
+              <div className="max-w-7xl max-h-[90vh] w-full relative" onClick={(e) => e.stopPropagation()}>
+                <div className="relative w-full h-[80vh]">
+                  <Image
+                    src={`/assets/1000236050_convert_${lightboxIndex}.png`}
+                    alt={`The Peepal Farm Stay Gallery Image ${lightboxIndex}`}
+                    fill
+                    className="object-contain"
+                    unoptimized
+                  />
+                </div>
                 <p className="text-white text-center mt-4 text-lg">
                   Image {lightboxIndex} of {totalImages}
                 </p>
@@ -552,36 +560,79 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">About the Founders</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">Meet the visionaries behind our sustainable farm stay</p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 border-emerald-300 overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6">
-                <div className="flex items-center gap-4 text-white">
-                  <img src="/founder-sunita.jpg" alt="Dr. Sunita Jha" className="w-20 h-20 rounded-full object-cover border-4 border-white/30" />
-                  <div>
-                    <h3 className="text-2xl font-bold">Dr. Sunita Jha</h3>
-                    <p className="text-emerald-100">🌿 Ayurvedic Doctor</p>
-                  </div>
+          
+          {/* Hosts Features */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+            <div className="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-lg border-2 border-green-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="flex-shrink-0">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                  <HomeIcon className="w-7 h-7 text-white" />
                 </div>
               </div>
-              <CardContent className="p-6">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Live Onsite Experience</h3>
+                <p className="text-gray-600 text-lg">Hosts live onsite with farm animals, offering authentic farm life immersion and personalized hospitality</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-lg border-2 border-amber-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="flex-shrink-0">
+                <div className="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                  <Users className="w-7 h-7 text-white" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Communal Dining</h3>
+                <p className="text-gray-600 text-lg">Share meals and stories with guests at a communal dining hall, creating warm connections and memorable moments</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <Card className="border-2 border-emerald-300 overflow-visible bg-gradient-to-br from-emerald-50 to-teal-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="flex flex-col items-center pt-8 pb-4">
+                <div className="relative w-48 h-48 mb-4">
+                  <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-emerald-400 shadow-xl bg-emerald-50">
+                    <Image 
+                      src="/assets/Sunita.jpeg" 
+                      alt="Dr. Sunita Jha" 
+                      fill
+                      className="object-contain"
+                      sizes="200px"
+                    />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-gray-800 mb-1">Dr. Sunita Jha</h3>
+                <p className="text-emerald-600 text-lg flex items-center gap-2 mb-4">
+                  <span className="text-2xl">🌿</span> Ayurvedic Doctor
+                </p>
+              </div>
+              <CardContent className="px-6 pb-6">
                 <p className="text-gray-700 text-lg leading-relaxed">
                   An Ayurvedic doctor by profession, Sunita brings with her a deep understanding of holistic living and natural wellness. Her passion for this farm stay project stems from a lifelong belief that true health comes from harmony with nature. By combining her medical expertise with sustainable practices, she envisions the farm stay as a place where guests can not only relax but also reconnect with traditional ways of living—through authentic food, eco-friendly mud houses, and mindful farm activities.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-amber-300 overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="bg-gradient-to-r from-amber-600 to-orange-600 p-6">
-                <div className="flex items-center gap-4 text-white">
-                  <img src="/founder-aditya.jpg" alt="Aditya Kumar" className="w-20 h-20 rounded-full object-cover border-4 border-white/30" />
-                  <div>
-                    <h3 className="text-2xl font-bold">Aditya Kumar</h3>
-                    <p className="text-amber-100">🌳 Engineer by Training</p>
+            <Card className="border-2 border-amber-300 overflow-visible bg-gradient-to-br from-amber-50 to-orange-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="flex flex-col items-center pt-8 pb-4">
+                <div className="relative w-48 h-48 mb-4">
+                  <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-amber-400 shadow-xl bg-amber-50">
+                    <Image 
+                      src="/assets/Aditya.jpeg" 
+                      alt="Aditya Kumar" 
+                      fill
+                      className="object-cover object-right"
+                      sizes="200px"
+                    />
                   </div>
                 </div>
+                <h3 className="text-3xl font-bold text-gray-800 mb-1">Aditya Kumar</h3>
+                <p className="text-amber-600 text-lg flex items-center gap-2 mb-4">
+                  <span className="text-2xl">🌳</span> Engineer by Training
+                </p>
               </div>
-              <CardContent className="p-6">
+              <CardContent className="px-6 pb-6">
                 <p className="text-gray-700 text-lg leading-relaxed">
                   An engineer by training, Aditya&apos;s first love has always been nature. His technical background helps bring structure and innovation to the project, while his passion ensures that every detail reflects respect for the environment. For Aditya, this farm stay is more than accommodation—it is a movement towards sustainable living, where guests can experience the joy of simplicity and the richness of rural life.
                 </p>
