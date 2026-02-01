@@ -46,11 +46,7 @@ function Navigation({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode:
     { label: 'Home', path: '/' },
     { label: 'Gallery', path: '/gallery' },
     { label: 'Rooms', path: '/#stay' },
-    { label: 'Experience', path: '/#experience' },
-    { label: 'Food', path: '/#food' },
-    { label: 'Hosts', path: '/#hosts' },
     { label: 'Location', path: '/#location' },
-    { label: 'Reviews', path: '/#reviews' },
   ];
 
   const handleNav = (path: string) => {
@@ -80,6 +76,19 @@ function Navigation({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode:
             The Peepal
           </span>
         </button>
+        
+        {/* Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center gap-6">
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleNav(item.path)}
+              className="text-sm font-medium hover:text-[#C8A45C] transition-colors"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
         
         <div className="flex items-center gap-2 md:gap-4">
           {/* WhatsApp Button - Desktop */}
@@ -112,9 +121,10 @@ function Navigation({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode:
             {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           
+          {/* Hamburger Menu - Hidden on Desktop */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-full bg-background border border-border hover:bg-accent transition-colors"
+            className="lg:hidden p-2 rounded-full bg-background border border-border hover:bg-accent transition-colors"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -395,6 +405,20 @@ function HomePage() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Set initial states for all animated elements
+      gsap.set('.welcome-image, .welcome-card, .welcome-title, .welcome-body, .welcome-cta', { 
+        opacity: 0 
+      });
+      gsap.set('.stay-image, .stay-card, .stay-headline, .stay-body, .stay-bullets', { 
+        opacity: 0 
+      });
+      gsap.set('.food-image, .food-card, .food-headline, .food-body, .food-bullets', { 
+        opacity: 0 
+      });
+      gsap.set('.hosts-image, .hosts-card, .hosts-headline, .hosts-body, .hosts-cta', { 
+        opacity: 0 
+      });
+      
       // Hero entrance animation
       const heroTl = gsap.timeline({ delay: 0.3 });
       heroTl.fromTo('.hero-image', 
@@ -784,6 +808,8 @@ function HomePage() {
             src="/images/room-interior.jpg"
             alt="Cozy room interior"
             className="w-full h-full object-cover"
+            loading="lazy"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
         <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card stay-card" />
@@ -923,13 +949,13 @@ function HomePage() {
             And Love
           </h2>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[64vh] md:top-[52vh] w-[92vw] md:w-[32vw] food-body food-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[60vh] md:top-[48vh] w-[92vw] md:w-[32vw] food-body food-text">
           <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
             Most meals come from the farm. Spices are local. Recipes are traditional. 
             The stove is wood-fired—and the flavor is real.
           </p>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[76vh] md:top-[68vh] food-cta food-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[70vh] md:top-[62vh] w-[92vw] md:w-[32vw] food-cta food-text">
           <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm md:text-base">
             <MessageCircle className="w-4 h-4 mr-2" />
             Ask about meals
@@ -954,13 +980,13 @@ function HomePage() {
             They Love
           </h2>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[64vh] md:top-[52vh] w-[92vw] md:w-[32vw] hosts-body hosts-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[60vh] md:top-[48vh] w-[92vw] md:w-[32vw] hosts-body hosts-text">
           <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
             <strong className="text-foreground">Dr. Sunita Jha</strong> (Ayurvedic Doctor) and <strong className="text-foreground">Aditya Kumar</strong> (Engineer) 
             built this place to share a slower, more intentional life.
           </p>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[78vh] md:top-[68vh] hosts-cta hosts-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[70vh] md:top-[62vh] w-[92vw] md:w-[32vw] hosts-cta hosts-text">
           <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm md:text-base">
             <MessageCircle className="w-4 h-4 mr-2" />
             Chat with hosts
@@ -1020,7 +1046,7 @@ function HomePage() {
             className="block w-full h-[30vh] md:h-[46vh] image-card location-animate overflow-hidden relative group"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d73.78!3d20.01!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDAwJzM2LjAiTiA3M8KwNDYnNDguMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2897.3195721230472!2d73.73496774469422!3d20.06011258953759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddef3ed1abd6b1%3A0xa6c96c21cf2bc2b9!2sThe%20Peepal!5e0!3m2!1sen!2sus!4v1769969381415!5m2!1sen!2sus"
               width="100%"
               height="100%"
               style={{ border: 0, filter: 'none' }}
