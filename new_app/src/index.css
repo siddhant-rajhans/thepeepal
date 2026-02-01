@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 33% 94%;
+    --foreground: 0 0% 10%;
+    --card: 42 33% 94%;
+    --card-foreground: 0 0% 10%;
+    --popover: 42 33% 94%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 160 60% 15%;
+    --primary-foreground: 42 33% 94%;
+    --secondary: 42 20% 88%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 42 20% 88%;
+    --muted-foreground: 40 6% 40%;
+    --accent: 42 50% 57%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 10% 80%;
+    --input: 40 10% 80%;
+    --ring: 160 60% 15%;
+    --radius: 0.625rem;
+    
+    --peepal-cream: #F4F1EA;
+    --peepal-green: #0E3A2F;
+    --peepal-gold: #C8A45C;
+    --peepal-dark: #1A1A1A;
+    --peepal-gray: #6E6A63;
+  }
+
+  .dark {
+    --background: 160 60% 8%;
+    --foreground: 42 33% 94%;
+    --card: 160 50% 12%;
+    --card-foreground: 42 33% 94%;
+    --popover: 160 50% 12%;
+    --popover-foreground: 42 33% 94%;
+    --primary: 42 50% 57%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 160 40% 18%;
+    --secondary-foreground: 42 33% 94%;
+    --muted: 160 40% 18%;
+    --muted-foreground: 42 20% 70%;
+    --accent: 42 50% 57%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 160 30% 25%;
+    --input: 160 30% 25%;
+    --ring: 42 50% 57%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+  .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+@layer components {
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  
+  .dark .grain-overlay {
+    opacity: 0.02;
+    mix-blend-mode: overlay;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-pinned {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heading-display {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .label-mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4;
+    @apply bg-[#C8A45C] text-[#1A1A1A] font-mono text-sm uppercase tracking-wider;
+    @apply rounded-sm transition-all duration-300;
+    @apply hover:bg-[#B8944C] hover:scale-105;
+    @apply dark:bg-[#C8A45C] dark:text-[#1A1A1A];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3;
+    @apply border-2 border-[#0E3A2F] text-[#0E3A2F] font-mono text-sm uppercase tracking-wider;
+    @apply rounded-sm transition-all duration-300;
+    @apply hover:bg-[#0E3A2F] hover:text-[#F4F1EA];
+    @apply dark:border-[#C8A45C] dark:text-[#C8A45C] dark:hover:bg-[#C8A45C] dark:hover:text-[#1A1A1A];
+  }
+
+  .image-card {
+    @apply rounded-lg overflow-hidden;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.10);
+  }
+
+  .paper-card {
+    @apply rounded-lg;
+    background: hsl(var(--card));
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .dark .paper-card {
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

@@ -1,0 +1,169 @@
+/* App-specific styles */
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+/* Ensure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(200, 164, 92, 0.3);
+  color: inherit;
+}
+
+/* Focus styles */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #C8A45C;
+  outline-offset: 2px;
+}
+
+/* Prevent text selection on decorative elements */
+.grain-overlay,
+.hero-leaf {
+  user-select: none;
+}
+
+/* Ensure pinned sections stack correctly */
+.section-pinned {
+  will-change: transform;
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  .section-pinned {
+    min-height: 100svh;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .heading-display {
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  
+  .image-card {
+    border-radius: 8px;
+  }
+  
+  .paper-card {
+    border-radius: 8px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section-pinned {
+    min-height: 100vh;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .grain-overlay {
+    display: none;
+  }
+  
+  .image-card:hover img,
+  .paper-card:hover {
+    transform: none;
+  }
+}
+
+/* Loading optimization */
+img {
+  content-visibility: auto;
+}
+
+/* Prevent layout shift */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* WhatsApp button pulse animation */
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-pulse {
+  animation: pulse-green 2s infinite;
+}
+
+/* Lightbox transitions */
+.lightbox-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.lightbox-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+/* Print styles */
+@media print {
+  nav,
+  .grain-overlay,
+  .btn-primary,
+  .btn-secondary {
+    display: none !important;
+  }
+  
+  .section-pinned {
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+}
