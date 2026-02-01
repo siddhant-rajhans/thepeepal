@@ -10,7 +10,28 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const totalImages = 20;
+  
+  // Gallery images - organized for best user experience
+  const galleryImages = [
+    // Featured new images first (your curated selection)
+    { src: '/assets/gallery-1.webp', alt: 'The Peepal Farm Stay - Main Hero View' }, // MAIN IMAGE
+    { src: '/assets/gallery-2.webp', alt: 'The Peepal Farm Stay - Welcome View' },
+    { src: '/assets/gallery-3.webp', alt: 'The Peepal Farm Stay - Scenic Landscape' },
+    { src: '/assets/gallery-4.jpg', alt: 'The Peepal Farm Stay - Outdoor Setting' },
+    { src: '/assets/gallery-5.jpg', alt: 'The Peepal Farm Stay - Garden Space' },
+    { src: '/assets/gallery-6.jpg', alt: 'The Peepal Farm Stay - Natural Beauty' },
+    // Additional farm gallery images
+    { src: '/assets/1000236050_convert_2.webp', alt: 'The Peepal Farm Stay - Farm Life' },
+    { src: '/assets/1000236050_convert_3.webp', alt: 'The Peepal Farm Stay - Rural Beauty' },
+    { src: '/assets/1000236050_convert_4.webp', alt: 'The Peepal Farm Stay - Green Fields' },
+    { src: '/assets/1000236050_convert_5.webp', alt: 'The Peepal Farm Stay - Farm Activities' },
+    { src: '/assets/1000236050_convert_6.webp', alt: 'The Peepal Farm Stay - Traditional Living' },
+    { src: '/assets/1000236050_convert_7.webp', alt: 'The Peepal Farm Stay - Nature Walk' },
+    { src: '/assets/1000236050_convert_8.webp', alt: 'The Peepal Farm Stay - Farm Animals' },
+    { src: '/assets/1000236050_convert_9.webp', alt: 'The Peepal Farm Stay - Countryside' },
+    { src: '/assets/1000236050_convert_10.webp', alt: 'The Peepal Farm Stay - Organic Farming' },
+  ];
+  const totalImages = galleryImages.length;
 
   // Placeholder images
   const placeholderImages = [
@@ -43,9 +64,9 @@ export default function Home() {
       if (lightboxIndex === null) return;
       
       if (e.key === 'ArrowLeft') {
-        setLightboxIndex((prev) => (prev! > 1 ? prev! - 1 : totalImages));
+        setLightboxIndex((prev) => (prev! > 0 ? prev! - 1 : totalImages - 1));
       } else if (e.key === 'ArrowRight') {
-        setLightboxIndex((prev) => (prev! < totalImages ? prev! + 1 : 1));
+        setLightboxIndex((prev) => (prev! < totalImages - 1 ? prev! + 1 : 0));
       } else if (e.key === 'Escape') {
         setLightboxIndex(null);
       }
@@ -384,20 +405,23 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((num) => (
+            {galleryImages.map((image, index) => (
               <div 
-                key={num} 
-                onClick={() => setLightboxIndex(num)}
+                key={index} 
+                onClick={() => setLightboxIndex(index)}
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
               >
                 <div className="aspect-video overflow-hidden bg-gray-100 relative">
                   <Image 
-                    src={`/assets/1000236050_convert_${num}.png`}
-                    alt={`The Peepal Farm Stay Gallery Image ${num}`}
+                    src={image.src}
+                    alt={image.alt}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    priority={index === 0}
+                    placeholder="blur"
+                    blurDataURL="data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA="
                   />
                 </div>
               </div>
@@ -417,7 +441,7 @@ export default function Home() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setLightboxIndex((prev) => (prev! > 1 ? prev! - 1 : totalImages));
+                  setLightboxIndex((prev) => (prev! > 0 ? prev! - 1 : totalImages - 1));
                 }}
                 className="absolute left-4 text-white hover:text-gray-300 transition-colors z-10"
               >
@@ -427,7 +451,7 @@ export default function Home() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setLightboxIndex((prev) => (prev! < totalImages ? prev! + 1 : 1));
+                  setLightboxIndex((prev) => (prev! < totalImages - 1 ? prev! + 1 : 0));
                 }}
                 className="absolute right-4 text-white hover:text-gray-300 transition-colors z-10"
               >
@@ -437,15 +461,15 @@ export default function Home() {
               <div className="max-w-7xl max-h-[90vh] w-full relative" onClick={(e) => e.stopPropagation()}>
                 <div className="relative w-full h-[80vh]">
                   <Image
-                    src={`/assets/1000236050_convert_${lightboxIndex}.png`}
-                    alt={`The Peepal Farm Stay Gallery Image ${lightboxIndex}`}
+                    src={galleryImages[lightboxIndex].src}
+                    alt={galleryImages[lightboxIndex].alt}
                     fill
                     className="object-contain"
-                    unoptimized
+                    quality={95}
                   />
                 </div>
                 <p className="text-white text-center mt-4 text-lg">
-                  Image {lightboxIndex} of {totalImages}
+                  Image {lightboxIndex + 1} of {totalImages}
                 </p>
               </div>
             </div>
@@ -599,6 +623,7 @@ export default function Home() {
                       fill
                       className="object-contain"
                       sizes="200px"
+                      priority
                     />
                   </div>
                 </div>
@@ -619,11 +644,12 @@ export default function Home() {
                 <div className="relative w-48 h-48 mb-4">
                   <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-amber-400 shadow-xl bg-amber-50">
                     <Image 
-                      src="/assets/Aditya.jpeg" 
+                      src="/assets/Aditya.webp" 
                       alt="Aditya Kumar" 
                       fill
                       className="object-cover object-right"
                       sizes="200px"
+                      priority
                     />
                   </div>
                 </div>
