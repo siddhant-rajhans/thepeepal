@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  Leaf, Moon, Sun, MapPin, Phone, 
+  Moon, Sun, MapPin, Phone, 
   ArrowRight, Star, Clock, Car, Check,
   MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight, ChevronDown
 } from 'lucide-react';
