@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   Leaf, Moon, Sun, MapPin, Phone, 
   ArrowRight, Star, Clock, Car, Check,
-  MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight
+  MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight, ChevronDown
 } from 'lucide-react';
 import './App.css';
 
@@ -71,7 +71,9 @@ function Navigation({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode:
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-background/80 backdrop-blur-md border-b border-border/50">
         <button onClick={() => handleNav('/')} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <Leaf className="w-5 h-5 text-[#C8A45C]" />
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden">
+            <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-full h-full object-cover scale-[1.5]" />
+          </div>
           <span className="font-mono text-xs md:text-sm uppercase tracking-widest font-medium">
             The Peepal
           </span>
@@ -190,7 +192,9 @@ function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <Leaf className="w-6 h-6 text-[#C8A45C]" />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden">
+                <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-full h-full object-cover scale-[1.5]" />
+              </div>
               <span className="font-mono text-lg uppercase tracking-widest text-white">
                 The Peepal
               </span>
@@ -444,13 +448,18 @@ function HomePage() {
         { y: '4vh', opacity: 0 },
         { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
         '-=0.5'
+      )
+      .fromTo('.hero-scroll-indicator',
+        { y: '2vh', opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
+        '-=0.3'
       );
 
       // Hero scroll animation
       ScrollTrigger.create({
         trigger: heroRef.current,
         start: 'top top',
-        end: '+=100%',
+        end: '+=70%',
         pin: true,
         scrub: 0.5,
         onUpdate: (self) => {
@@ -471,7 +480,7 @@ function HomePage() {
               rotation: 12 * exitProgress,
               opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.7
             });
-            gsap.set('.hero-subtext, .hero-cta', {
+            gsap.set('.hero-subtext, .hero-cta, .hero-scroll-indicator', {
               y: 8 * exitProgress + 'vh',
               opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.8
             });
@@ -724,37 +733,40 @@ function HomePage() {
       <div className="grain-overlay" />
 
       {/* Section 1: Hero - Fixed Layout */}
-      <section ref={heroRef} className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10">
+      <section ref={heroRef} className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10 min-h-screen pb-20">
         {/* Image - Desktop: left, Mobile: top */}
-        <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[55vw] h-[38vh] md:h-[64vh] image-card hero-image">
+        <div className="absolute left-[4vw] md:left-[6vw] top-[12vh] md:top-[15vh] w-[92vw] md:w-[52vw] h-[42vh] md:h-[58vh] rounded-lg overflow-hidden image-card hero-image">
           <img
-            src="/images/hero-lane.jpg"
+            src="/images/gallery-1.webp"
             alt="The Peepal Farm Stay entrance"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover scale-110"
           />
         </div>
         
-        {/* Leaf - Hidden on mobile */}
-        <div className="hidden md:block absolute right-[6vw] top-[10vh] w-[14vw] hero-leaf opacity-60">
-          <Leaf className="w-full h-auto text-[#C8A45C]" strokeWidth={0.5} />
+        {/* Logo - Hidden on mobile */}
+        {/* To revert to leaf icon, replace the div below with: <Leaf className="w-full h-auto text-[#C8A45C]" strokeWidth={0.5} /> */}
+        <div className="hidden md:block absolute right-[10vw] top-[16vh] w-[11vw] aspect-square hero-leaf opacity-60">
+          <div className="w-full h-full rounded-full overflow-hidden">
+            <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-full h-full object-cover scale-[1.5]" />
+          </div>
         </div>
         
-        {/* Headline - Desktop: right, Mobile: below image */}
-        <div className="absolute left-[4vw] md:left-auto md:right-[6vw] top-[54vh] md:top-[22vh] hero-headline">
+        {/* Headline - Desktop: slightly left of right, Mobile: below image */}
+        <div className="absolute left-[4vw] md:left-auto md:right-[15vw] top-[56vh] md:top-[24vh] hero-headline">
           <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block leading-[0.9]">The</span>
           <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block leading-[0.9]">Peepal</span>
           <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block text-[#C8A45C] leading-[0.9]">Farm Stay</span>
         </div>
         
         {/* Subtext - Desktop: right side, Mobile: below headline */}
-        <div className="absolute left-[4vw] md:left-auto md:right-[6vw] top-[72vh] md:top-[52vh] w-[92vw] md:w-[32vw] hero-subtext">
+        <div className="absolute left-[4vw] md:left-auto md:right-[6vw] top-[74vh] md:top-[48vh] w-[92vw] md:w-[32vw] hero-subtext">
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
             Eco-friendly mud homes in the heart of Maharashtra. Experience sustainable living in harmony with nature.
           </p>
         </div>
         
         {/* CTA */}
-        <div className="absolute left-[4vw] md:left-auto md:right-[6vw] top-[82vh] md:top-[66vh] hero-cta">
+        <div className="absolute left-[4vw] md:left-auto md:right-[15vw] top-[82vh] md:top-[58vh] hero-cta">
           <a 
             href={WHATSAPP_LINK}
             target="_blank"
@@ -770,13 +782,21 @@ function HomePage() {
         <div className="absolute left-[4vw] md:left-[6vw] top-[10vh] label-mono text-muted-foreground text-xs md:text-sm">
           Nashik, Maharashtra
         </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 flex flex-col items-center gap-2 hero-scroll-indicator z-10">
+          <span className="label-mono text-muted-foreground text-xs">Scroll</span>
+          <div className="animate-bounce">
+            <ChevronDown className="w-5 h-5 text-[#C8A45C]" />
+          </div>
+        </div>
       </section>
 
       {/* Section 2: Welcome */}
       <section ref={welcomeRef} className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-20">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card welcome-image">
           <img
-            src="/images/farmhouse-exterior.jpg"
+            src="/images/1000236050_convert_8.webp"
             alt="Farmhouse exterior"
             className="w-full h-full object-cover"
           />
@@ -805,27 +825,27 @@ function HomePage() {
       <section ref={stayRef} id="stay" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-30">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card stay-image">
           <img
-            src="/images/room-interior.jpg"
+            src="/images/gallery-3.webp"
             alt="Cozy room interior"
             className="w-full h-full object-cover"
             loading="lazy"
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            style={{ objectPosition: 'center 30%' }}
           />
         </div>
         <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card stay-card" />
-        <div className="absolute left-[4vw] md:left-[58vw] top-[48vh] md:top-[22vh] w-[92vw] md:w-[32vw] stay-headline stay-text">
-          <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[48vh] md:top-[28vh] w-[92vw] md:w-[32vw] stay-headline stay-text">
+          <h2 className="heading-display text-[clamp(2rem,7vw,3.5rem)] md:text-[clamp(2.5rem,3.5vw,3.5rem)]">
             Stay With Us<br />
             <span className="text-[#C8A45C]">And Live Green</span>
           </h2>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[60vh] md:top-[46vh] w-[92vw] md:w-[32vw] stay-body stay-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[54vh] md:top-[38vh] w-[92vw] md:w-[32vw] stay-body stay-text">
           <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
             We use rainwater harvesting, organic farming, and minimal plastic. When you stay here, 
             you support a cleaner, quieter way of life rooted in sustainability.
           </p>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[72vh] md:top-[60vh] stay-bullets stay-text space-y-2 md:space-y-3">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[62vh] md:top-[48vh] stay-bullets stay-text space-y-2 md:space-y-3">
           {['Mud villas & dorms', 'Farm-to-table meals', 'Guided farm walks'].map((item) => (
             <div key={item} className="flex items-center gap-2 md:gap-3">
               <Check className="w-3 h-3 md:w-4 md:h-4 text-[#C8A45C]" />
@@ -858,7 +878,7 @@ function HomePage() {
             </div>
             <div className="paper-card p-4 md:p-6 experience-animate">
               <img
-                src="/images/nature-walk.jpg"
+                src="/images/gallery-4.jpg"
                 alt="Nature walk"
                 className="w-full h-40 md:h-48 object-cover rounded-lg mb-4"
               />
@@ -873,7 +893,7 @@ function HomePage() {
               {/* Mud Villa */}
               <div className="paper-card overflow-hidden experience-animate">
                 <img
-                  src="/images/mud-villa.jpg"
+                  src="/assets-png-backup/1000236050_convert_10.png"
                   alt="Mud Villa"
                   className="w-full h-48 md:h-64 object-cover"
                 />
@@ -1113,7 +1133,7 @@ function HomePage() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="image-card booking-animate">
               <img
-                src="/images/closing-scene.jpg"
+                src="/images/gallery-1.webp"
                 alt="Peaceful farm landscape"
                 className="w-full h-[35vh] md:h-[50vh] object-cover"
               />
