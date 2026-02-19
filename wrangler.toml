@@ -1,5 +1,5 @@
 name = "thepeepal"
 compatibility_date = "2026-01-14"
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = "dist"
 
 compatibility_flags = ["nodejs_compat"]
