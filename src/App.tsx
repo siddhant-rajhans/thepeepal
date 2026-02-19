@@ -1009,15 +1009,19 @@ function HomePage() {
               <div className="space-y-3 md:space-y-4">
                 <div className="flex items-center gap-3 md:gap-4">
                   <Car className="w-4 h-4 md:w-5 md:h-5 text-[#C8A45C]" />
-                  <span className="text-muted-foreground text-sm md:text-base">~45 min from Nashik city</span>
+                  <span className="text-muted-foreground text-sm md:text-base">6.5 KM from Nashik city</span>
                 </div>
                 <div className="flex items-center gap-3 md:gap-4">
                   <MapPin className="w-4 h-4 md:w-5 md:h-5 text-[#C8A45C]" />
-                  <span className="text-muted-foreground text-sm md:text-base">Road access + parking</span>
+                  <span className="text-muted-foreground text-sm md:text-base">23 km from Airport</span>
+                </div>
+                <div className="flex items-center gap-3 md:gap-4">
+                  <MapPin className="w-4 h-4 md:w-5 md:h-5 text-[#C8A45C]" />
+                  <span className="text-muted-foreground text-sm md:text-base">21.5 km from Nashik Road Railway Station</span>
                 </div>
                 <div className="flex items-center gap-3 md:gap-4">
                   <Clock className="w-4 h-4 md:w-5 md:h-5 text-[#C8A45C]" />
-                  <span className="text-muted-foreground text-sm md:text-base">Check-in: 12PM | Check-out: 10AM</span>
+                  <span className="text-muted-foreground text-sm md:text-base">Check-in: 12PM | Check-out: 11AM</span>
                 </div>
               </div>
             </div>
