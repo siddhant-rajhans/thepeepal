@@ -22,18 +22,18 @@ const INSTAGRAM_LINK = 'https://www.instagram.com/thepeepal_its_us/';
 
 // Gallery images
 const GALLERY_IMAGES = [
-  { src: '/images/hero-lane.jpg', alt: 'The Peepal Farm Stay Entrance' },
-  { src: '/images/farmhouse-exterior.jpg', alt: 'Farmhouse Exterior' },
-  { src: '/images/room-interior.jpg', alt: 'Cozy Room Interior' },
-  { src: '/images/mud-villa.jpg', alt: 'Mud Villa' },
-  { src: '/images/mud-dormitory.jpg', alt: 'Mud Dormitory' },
-  { src: '/images/farm-activities.jpg', alt: 'Farm Activities' },
-  { src: '/images/kitchen-fire.jpg', alt: 'Traditional Kitchen' },
-  { src: '/images/farm-meal.jpg', alt: 'Farm Fresh Meal' },
-  { src: '/images/organic-garden.jpg', alt: 'Organic Garden' },
-  { src: '/images/nature-walk.jpg', alt: 'Nature Walk' },
-  { src: '/images/founders-field.jpg', alt: 'Hosts in the Field' },
-  { src: '/images/closing-scene.jpg', alt: 'Peaceful Farm Landscape' },
+  { src: '/images/hero-lane.jpg', alt: 'The Peepal Farm Stay main entrance with traditional mud architecture and natural landscaping in Nashik' },
+  { src: '/images/farmhouse-exterior.jpg', alt: 'Eco-friendly mud farmhouse exterior showcasing sustainable earthen construction techniques' },
+  { src: '/images/room-interior.jpg', alt: 'Cozy mud villa interior room with traditional decor at The Peepal Farm Stay' },
+  { src: '/images/mud-villa.jpg', alt: 'Private eco-friendly mud villa accommodation with rustic charm and modern comfort' },
+  { src: '/images/mud-dormitory.jpg', alt: 'Budget-friendly mud dormitory with sustainable construction for backpackers and groups' },
+  { src: '/images/farm-activities.jpg', alt: 'Hands-on organic farming activities and agricultural experiences for guests' },
+  { src: '/images/kitchen-fire.jpg', alt: 'Traditional clay stove kitchen cooking farm-to-table meals with organic ingredients' },
+  { src: '/images/farm-meal.jpg', alt: 'Farm fresh organic meal prepared with locally sourced vegetables and traditional recipes' },
+  { src: '/images/organic-garden.jpg', alt: 'Organic vegetable garden with sustainable farming practices and rainwater harvesting' },
+  { src: '/images/nature-walk.jpg', alt: 'Guided nature walk through farm trails and countryside surrounding The Peepal Farm Stay' },
+  { src: '/images/founders-field.jpg', alt: 'The Peepal Farm Stay founders working in organic farming fields demonstrating sustainable agriculture' },
+  { src: '/images/closing-scene.jpg', alt: 'Peaceful farm landscape at sunset showcasing rural beauty near Nashik Maharashtra' },
 ];
 
 // Navigation Component
@@ -738,7 +738,7 @@ function HomePage() {
         <div className="absolute left-[4vw] md:left-[6vw] top-[12vh] md:top-[15vh] w-[92vw] md:w-[52vw] h-[42vh] md:h-[58vh] rounded-lg overflow-hidden image-card hero-image">
           <img
             src="/images/gallery-1.webp"
-            alt="The Peepal Farm Stay entrance"
+            alt="The Peepal Farm Stay eco-friendly mud villa entrance with natural landscaping in Nashik Maharashtra"
             className="w-full h-full object-cover scale-110"
           />
         </div>
@@ -797,7 +797,7 @@ function HomePage() {
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card welcome-image">
           <img
             src="/images/1000236050_convert_8.webp"
-            alt="Farmhouse exterior"
+            alt="Traditional mud farmhouse exterior at The Peepal Farm Stay with eco-friendly architecture"
             className="w-full h-full object-cover"
           />
         </div>
@@ -826,7 +826,7 @@ function HomePage() {
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card stay-image">
           <img
             src="/images/gallery-3.webp"
-            alt="Cozy room interior"
+            alt="Cozy eco-friendly mud villa interior room at The Peepal Farm Stay Nashik"
             className="w-full h-full object-cover"
             loading="lazy"
             style={{ objectPosition: 'center 30%' }}
@@ -861,7 +861,7 @@ function HomePage() {
           <div className="w-full h-[30vh] md:h-[46vh] image-card experience-animate mb-8 md:mb-12">
             <img
               src="/images/farm-activities.jpg"
-              alt="Farm activities"
+              alt="Organic farming activities and agricultural experiences at The Peepal Farm Stay"
               className="w-full h-full object-cover"
             />
           </div>
@@ -879,7 +879,7 @@ function HomePage() {
             <div className="paper-card p-4 md:p-6 experience-animate">
               <img
                 src="/images/gallery-4.jpg"
-                alt="Nature walk"
+                alt="Afternoon chai under trees nature walk experience at The Peepal sustainable farm stay"
                 className="w-full h-40 md:h-48 object-cover rounded-lg mb-4"
               />
               <p className="label-mono text-muted-foreground text-xs md:text-sm">Afternoon chai under the trees</p>
@@ -894,7 +894,7 @@ function HomePage() {
               <div className="paper-card overflow-hidden experience-animate">
                 <img
                   src="/assets-png-backup/1000236050_convert_10.png"
-                  alt="Mud Villa"
+                  alt="Private eco-friendly mud villa accommodation with traditional architecture at The Peepal Farm Stay Nashik"
                   className="w-full h-48 md:h-64 object-cover"
                 />
                 <div className="p-4 md:p-6">
@@ -923,7 +923,7 @@ function HomePage() {
               <div className="paper-card overflow-hidden experience-animate">
                 <img
                   src="/images/mud-dormitory.jpg"
-                  alt="Mud Dormitory"
+                  alt="Budget-friendly mud dormitory accommodation with sustainable earthen construction"
                   className="w-full h-48 md:h-64 object-cover"
                 />
                 <div className="p-4 md:p-6">
@@ -957,7 +957,7 @@ function HomePage() {
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card food-image">
           <img
             src="/images/kitchen-fire.jpg"
-            alt="Traditional clay stove cooking"
+            alt="Traditional clay stove farm-to-table cooking at The Peepal organic farm stay"
             className="w-full h-full object-cover"
           />
         </div>
@@ -988,7 +988,7 @@ function HomePage() {
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card hosts-image">
           <img
             src="/images/founders-field.jpg"
-            alt="Founders in the field"
+            alt="The Peepal Farm Stay founders in organic farming field practicing sustainable agriculture"
             className="w-full h-full object-cover"
           />
         </div>
@@ -1134,7 +1134,7 @@ function HomePage() {
             <div className="image-card booking-animate">
               <img
                 src="/images/gallery-1.webp"
-                alt="Peaceful farm landscape"
+                alt="Peaceful farm landscape and eco-retreat at The Peepal Farm Stay near Nashik Airport"
                 className="w-full h-[35vh] md:h-[50vh] object-cover"
               />
             </div>

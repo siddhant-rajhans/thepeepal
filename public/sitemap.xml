@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://thepeepalfarmstay.in/images/gallery-1.webp</image:loc>
+      <image:title>The Peepal Farm Stay - Eco-Friendly Mud Homes</image:title>
+      <image:caption>Sustainable farm stay with mud villas in Nashik, Maharashtra</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Welcome Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#welcome</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Stay Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#stay</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Experience Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#experience</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Food Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#food</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Gallery Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#gallery</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Location Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#location</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Booking Section -->
+  <url>
+    <loc>https://thepeepalfarmstay.in/#booking</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+</urlset>
