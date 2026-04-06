@@ -26,7 +26,7 @@ const GALLERY_IMAGES = [
   { src: '/images/farmhouse-exterior.jpg', alt: 'Farmhouse Exterior' },
   { src: '/images/room-interior.jpg', alt: 'Cozy Room Interior' },
   { src: '/images/mud-villa.jpg', alt: 'Mud Villa' },
-  { src: '/images/mud-dormitory.jpg', alt: 'Mud Dormitory' },
+  { src: '/images/mud-dormitory.jpeg', alt: 'Mud Dormitory' },
   { src: '/images/farm-activities.jpg', alt: 'Farm Activities' },
   { src: '/images/kitchen-fire.jpg', alt: 'Traditional Kitchen' },
   { src: '/images/farm-meal.jpg', alt: 'Farm Fresh Meal' },
@@ -876,7 +876,7 @@ function HomePage() {
               {/* Mud Dormitory */}
               <div className="paper-card overflow-hidden experience-animate">
                 <img
-                  src="/images/mud-dormitory.jpg"
+                  src="/images/mud-dormitory.jpeg"
                   alt="Mud Dormitory"
                   className="w-full h-48 md:h-64 object-cover"
                 />

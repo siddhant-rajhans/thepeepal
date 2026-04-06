@@ -1,15 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   Moon, Sun, MapPin, Phone, 
   ArrowRight, Star, Clock, Car, Check,
   MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight, ChevronDown
 } from 'lucide-react';
 import './App.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Contact constants
 const WHATSAPP_NUMBER = '919420479673';
@@ -22,18 +18,18 @@ const INSTAGRAM_LINK = 'https://www.instagram.com/thepeepal_its_us/';
 
 // Gallery images
 const GALLERY_IMAGES = [
-  { src: '/images/hero-lane.jpg', alt: 'The Peepal Farm Stay main entrance with traditional mud architecture and natural landscaping in Nashik' },
-  { src: '/images/farmhouse-exterior.jpg', alt: 'Eco-friendly mud farmhouse exterior showcasing sustainable earthen construction techniques' },
-  { src: '/images/room-interior.jpg', alt: 'Cozy mud villa interior room with traditional decor at The Peepal Farm Stay' },
-  { src: '/images/mud-villa.jpg', alt: 'Private eco-friendly mud villa accommodation with rustic charm and modern comfort' },
-  { src: '/images/mud-dormitory.jpg', alt: 'Budget-friendly mud dormitory with sustainable construction for backpackers and groups' },
-  { src: '/images/farm-activities.jpg', alt: 'Hands-on organic farming activities and agricultural experiences for guests' },
-  { src: '/images/kitchen-fire.jpg', alt: 'Traditional clay stove kitchen cooking farm-to-table meals with organic ingredients' },
-  { src: '/images/farm-meal.jpg', alt: 'Farm fresh organic meal prepared with locally sourced vegetables and traditional recipes' },
-  { src: '/images/organic-garden.jpg', alt: 'Organic vegetable garden with sustainable farming practices and rainwater harvesting' },
-  { src: '/images/nature-walk.jpg', alt: 'Guided nature walk through farm trails and countryside surrounding The Peepal Farm Stay' },
-  { src: '/images/founders-field.jpg', alt: 'The Peepal Farm Stay founders working in organic farming fields demonstrating sustainable agriculture' },
-  { src: '/images/closing-scene.jpg', alt: 'Peaceful farm landscape at sunset showcasing rural beauty near Nashik Maharashtra' },
+  { src: '/images/gallery-1.webp', alt: 'The Peepal Farm Stay main entrance with traditional mud architecture and natural landscaping in Nashik' },
+  { src: '/images/1000236050_convert_8.webp', alt: 'Eco-friendly mud farmhouse exterior showcasing sustainable earthen construction techniques' },
+  { src: '/images/gallery-3.webp', alt: 'Cozy mud villa interior room with traditional decor at The Peepal Farm Stay' },
+  { src: '/assets-png-backup/1000236050_convert_10.png', alt: 'Private eco-friendly mud villa accommodation with rustic charm and modern comfort' },
+  { src: '/images/mud-dormitory.jpeg', alt: 'Budget-friendly mud dormitory with sustainable construction for backpackers and groups' },
+  { src: '/images/1000236050_convert_9.webp', alt: 'Hands-on organic farming activities and agricultural experiences for guests' },
+  { src: '/images/1000236050_convert_7.webp', alt: 'Traditional clay stove kitchen cooking farm-to-table meals with organic ingredients' },
+  { src: '/images/gallery-5.jpg', alt: 'Farm fresh organic meal prepared with locally sourced vegetables and traditional recipes' },
+  { src: '/images/1000236050_convert_6.webp', alt: 'Organic vegetable garden with sustainable farming practices and rainwater harvesting' },
+  { src: '/images/gallery-4.jpg', alt: 'Guided nature walk through farm trails and countryside surrounding The Peepal Farm Stay' },
+  { src: '/images/founder.png', alt: 'The Peepal Farm Stay founders working in organic farming fields demonstrating sustainable agriculture' },
+  { src: '/images/gallery-6.jpg', alt: 'Peaceful farm landscape at sunset showcasing rural beauty near Nashik Maharashtra' },
 ];
 
 // Navigation Component
@@ -400,340 +396,13 @@ function GalleryPage() {
 
 // Home Page Component
 function HomePage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const welcomeRef = useRef<HTMLDivElement>(null);
-  const stayRef = useRef<HTMLDivElement>(null);
-  const experienceRef = useRef<HTMLDivElement>(null);
-  const foodRef = useRef<HTMLDivElement>(null);
-  const hostsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Set initial states for all animated elements
-      gsap.set('.welcome-image, .welcome-card, .welcome-title, .welcome-body, .welcome-cta', { 
-        opacity: 0 
-      });
-      gsap.set('.stay-image, .stay-card, .stay-headline, .stay-body, .stay-bullets', { 
-        opacity: 0 
-      });
-      gsap.set('.food-image, .food-card, .food-headline, .food-body, .food-bullets', { 
-        opacity: 0 
-      });
-      gsap.set('.hosts-image, .hosts-card, .hosts-headline, .hosts-body, .hosts-cta', { 
-        opacity: 0 
-      });
-      
-      // Hero entrance animation
-      const heroTl = gsap.timeline({ delay: 0.3 });
-      heroTl.fromTo('.hero-image', 
-        { x: '-60vw', scale: 1.08, opacity: 0 },
-        { x: 0, scale: 1, opacity: 1, duration: 1, ease: 'power3.out' }
-      )
-      .fromTo('.hero-headline span',
-        { x: '10vw', opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.08 },
-        '-=0.7'
-      )
-      .fromTo('.hero-leaf',
-        { y: '-12vh', rotation: -10, opacity: 0 },
-        { y: 0, rotation: 0, opacity: 1, duration: 1, ease: 'back.out(1.4)' },
-        '-=0.8'
-      )
-      .fromTo('.hero-subtext',
-        { y: '4vh', opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
-        '-=0.5'
-      )
-      .fromTo('.hero-cta',
-        { y: '4vh', opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
-        '-=0.5'
-      )
-      .fromTo('.hero-scroll-indicator',
-        { y: '2vh', opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
-        '-=0.3'
-      );
-
-      // Hero scroll animation
-      ScrollTrigger.create({
-        trigger: heroRef.current,
-        start: 'top top',
-        end: '+=70%',
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress > 0.6) {
-            const exitProgress = (progress - 0.6) / 0.4;
-            gsap.set('.hero-image', {
-              x: -25 * exitProgress + 'vw',
-              scale: 1 - 0.05 * exitProgress,
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.hero-headline', {
-              x: 15 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.85
-            });
-            gsap.set('.hero-leaf', {
-              y: -15 * exitProgress + 'vh',
-              rotation: 12 * exitProgress,
-              opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.7
-            });
-            gsap.set('.hero-subtext, .hero-cta, .hero-scroll-indicator', {
-              y: 8 * exitProgress + 'vh',
-              opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.8
-            });
-          }
-        }
-      });
-
-      // Welcome section
-      ScrollTrigger.create({
-        trigger: welcomeRef.current,
-        start: 'top top',
-        end: '+=90%',
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress <= 0.25) {
-            const enterProgress = progress / 0.25;
-            gsap.set('.welcome-image', {
-              x: -50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.welcome-card', {
-              x: 50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.welcome-title', {
-              y: 8 * (1 - enterProgress) + 'vh',
-              opacity: enterProgress
-            });
-            gsap.set('.welcome-body, .welcome-cta', {
-              y: 5 * (1 - Math.max(0, (progress - 0.12) / 0.13)) + 'vh',
-              opacity: Math.max(0, (progress - 0.12) / 0.13)
-            });
-          } else if (progress > 0.65) {
-            const exitProgress = (progress - 0.65) / 0.35;
-            gsap.set('.welcome-card', {
-              x: 25 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.welcome-image', {
-              x: -25 * exitProgress + 'vw',
-              scale: 1 - 0.03 * exitProgress,
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.welcome-text', {
-              y: -5 * exitProgress + 'vh',
-              opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.7
-            });
-          }
-        }
-      });
-
-      // Stay section
-      ScrollTrigger.create({
-        trigger: stayRef.current,
-        start: 'top top',
-        end: '+=95%',
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress <= 0.25) {
-            const enterProgress = progress / 0.25;
-            gsap.set('.stay-image', {
-              x: -50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.stay-card', {
-              x: 50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.stay-headline', {
-              y: 10 * (1 - enterProgress) + 'vh',
-              opacity: enterProgress
-            });
-            gsap.set('.stay-body, .stay-bullets', {
-              y: 5 * (1 - Math.max(0, (progress - 0.12) / 0.13)) + 'vh',
-              opacity: Math.max(0, (progress - 0.12) / 0.13)
-            });
-          } else if (progress > 0.65) {
-            const exitProgress = (progress - 0.65) / 0.35;
-            gsap.set('.stay-card', {
-              x: 40 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.stay-image', {
-              x: -25 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.stay-headline', {
-              y: -8 * exitProgress + 'vh',
-              opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.7
-            });
-          }
-        }
-      });
-
-      // Food section
-      ScrollTrigger.create({
-        trigger: foodRef.current,
-        start: 'top top',
-        end: '+=90%',
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress <= 0.25) {
-            const enterProgress = progress / 0.25;
-            gsap.set('.food-image', {
-              x: -50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.food-card', {
-              x: 50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.food-headline', {
-              y: 10 * (1 - enterProgress) + 'vh',
-              opacity: enterProgress
-            });
-            gsap.set('.food-body, .food-cta', {
-              y: 5 * (1 - Math.max(0, (progress - 0.12) / 0.13)) + 'vh',
-              opacity: Math.max(0, (progress - 0.12) / 0.13)
-            });
-          } else if (progress > 0.65) {
-            const exitProgress = (progress - 0.65) / 0.35;
-            gsap.set('.food-image', {
-              x: -25 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.food-card', {
-              x: 25 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.food-text', {
-              y: -5 * exitProgress + 'vh',
-              opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.7
-            });
-          }
-        }
-      });
-
-      // Hosts section
-      ScrollTrigger.create({
-        trigger: hostsRef.current,
-        start: 'top top',
-        end: '+=90%',
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress <= 0.25) {
-            const enterProgress = progress / 0.25;
-            gsap.set('.hosts-image', {
-              x: -50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.hosts-card', {
-              x: 50 * (1 - enterProgress) + 'vw',
-              opacity: enterProgress
-            });
-            gsap.set('.hosts-headline', {
-              y: 10 * (1 - enterProgress) + 'vh',
-              opacity: enterProgress
-            });
-            gsap.set('.hosts-body, .hosts-cta', {
-              y: 5 * (1 - Math.max(0, (progress - 0.12) / 0.13)) + 'vh',
-              opacity: Math.max(0, (progress - 0.12) / 0.13)
-            });
-          } else if (progress > 0.65) {
-            const exitProgress = (progress - 0.65) / 0.35;
-            gsap.set('.hosts-image', {
-              x: -25 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.hosts-card', {
-              x: 25 * exitProgress + 'vw',
-              opacity: progress > 0.95 ? 0 : 1 - exitProgress * 0.8
-            });
-            gsap.set('.hosts-text', {
-              y: -5 * exitProgress + 'vh',
-              opacity: progress > 0.98 ? 0 : 1 - exitProgress * 0.7
-            });
-          }
-        }
-      });
-
-      // Flowing sections animation
-      const flowingSections = ['.experience-', '.location-', '.reviews-', '.booking-'];
-      flowingSections.forEach((prefix) => {
-        gsap.fromTo(`${prefix}animate`,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'power2.out',
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: prefix === '.experience-' ? experienceRef.current : 
-                       prefix === '.location-' ? document.getElementById('location') :
-                       prefix === '.reviews-' ? document.getElementById('reviews') :
-                       document.getElementById('booking'),
-              start: 'top 85%',
-              end: 'top 50%',
-              scrub: true
-            }
-          }
-        );
-      });
-
-      // Global snap for pinned sections
-      const pinned = ScrollTrigger.getAll().filter(st => st.vars.pin).sort((a, b) => a.start - b.start);
-      const maxScroll = ScrollTrigger.maxScroll(window);
-      
-      if (maxScroll && pinned.length > 0) {
-        const pinnedRanges = pinned.map(st => ({
-          start: st.start / maxScroll,
-          end: (st.end ?? st.start) / maxScroll,
-          center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
-        }));
-
-        ScrollTrigger.create({
-          snap: {
-            snapTo: (value: number) => {
-              const inPinned = pinnedRanges.some(r => value >= r.start - 0.02 && value <= r.end + 0.02);
-              if (!inPinned) return value;
-              
-              const target = pinnedRanges.reduce((closest, r) =>
-                Math.abs(r.center - value) < Math.abs(closest - value) ? r.center : closest,
-                pinnedRanges[0]?.center ?? 0
-              );
-              return target;
-            },
-            duration: { min: 0.15, max: 0.35 },
-            delay: 0,
-            ease: 'power2.out'
-          }
-        });
-      }
-    });
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div className="relative">
       {/* Grain Overlay */}
       <div className="grain-overlay" />
 
       {/* Section 1: Hero - Fixed Layout */}
-      <section ref={heroRef} className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10 min-h-screen pb-20">
+      <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10 min-h-screen pb-20">
         {/* Image - Desktop: left, Mobile: top */}
         <div className="absolute left-[4vw] md:left-[6vw] top-[12vh] md:top-[15vh] w-[92vw] md:w-[52vw] h-[42vh] md:h-[58vh] rounded-lg overflow-hidden image-card hero-image">
           <img
@@ -786,14 +455,14 @@ function HomePage() {
         {/* Scroll Indicator */}
         <div className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 flex flex-col items-center gap-2 hero-scroll-indicator z-10">
           <span className="label-mono text-muted-foreground text-xs">Scroll</span>
-          <div className="animate-bounce">
+          <div>
             <ChevronDown className="w-5 h-5 text-[#C8A45C]" />
           </div>
         </div>
       </section>
 
       {/* Section 2: Welcome */}
-      <section ref={welcomeRef} className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-20">
+      <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-20">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card welcome-image">
           <img
             src="/images/1000236050_convert_8.webp"
@@ -822,7 +491,7 @@ function HomePage() {
       </section>
 
       {/* Section 3: Stay & Philosophy */}
-      <section ref={stayRef} id="stay" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-30">
+      <section id="stay" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-30">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card stay-image">
           <img
             src="/images/gallery-3.webp"
@@ -856,11 +525,11 @@ function HomePage() {
       </section>
 
       {/* Section 4: The Experience */}
-      <section ref={experienceRef} id="experience" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-40">
+      <section id="experience" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-40">
         <div className="px-4 md:px-[6vw]">
           <div className="w-full h-[30vh] md:h-[46vh] image-card experience-animate mb-8 md:mb-12">
             <img
-              src="/images/farm-activities.jpg"
+              src="/images/1000236050_convert_9.webp"
               alt="Organic farming activities and agricultural experiences at The Peepal Farm Stay"
               className="w-full h-full object-cover"
             />
@@ -895,7 +564,7 @@ function HomePage() {
                 <img
                   src="/assets-png-backup/1000236050_convert_10.png"
                   alt="Private eco-friendly mud villa accommodation with traditional architecture at The Peepal Farm Stay Nashik"
-                  className="w-full h-48 md:h-64 object-cover"
+                  className="w-full aspect-square object-cover"
                 />
                 <div className="p-4 md:p-6">
                   <div className="flex justify-between items-start mb-3 md:mb-4">
@@ -922,9 +591,9 @@ function HomePage() {
               {/* Mud Dormitory */}
               <div className="paper-card overflow-hidden experience-animate">
                 <img
-                  src="/images/mud-dormitory.jpg"
+                  src="/images/mud-dormitory.jpeg"
                   alt="Budget-friendly mud dormitory accommodation with sustainable earthen construction"
-                  className="w-full h-48 md:h-64 object-cover"
+                  className="w-full aspect-square object-cover"
                 />
                 <div className="p-4 md:p-6">
                   <div className="flex justify-between items-start mb-3 md:mb-4">
@@ -953,10 +622,10 @@ function HomePage() {
       </section>
 
       {/* Section 5: Food & Fire */}
-      <section ref={foodRef} id="food" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-50">
+      <section id="food" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-50">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card food-image">
           <img
-            src="/images/kitchen-fire.jpg"
+            src="/images/1000236050_convert_7.webp"
             alt="Traditional clay stove farm-to-table cooking at The Peepal organic farm stay"
             className="w-full h-full object-cover"
           />
@@ -984,10 +653,10 @@ function HomePage() {
       </section>
 
       {/* Section 6: Hosts */}
-      <section ref={hostsRef} id="hosts" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-[60]">
+      <section id="hosts" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-[60]">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card hosts-image">
           <img
-            src="/images/founders-field.jpg"
+            src="/images/founder.png"
             alt="The Peepal Farm Stay founders in organic farming field practicing sustainable agriculture"
             className="w-full h-full object-cover"
           />
