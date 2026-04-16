@@ -5,6 +5,7 @@ import {
   ArrowRight, Star, Clock, Car, Check,
   MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight, ChevronDown
 } from 'lucide-react';
+import { OptimizedImage } from './components/optimized-image';
 import './App.css';
 
 // Contact constants
@@ -15,6 +16,50 @@ const PHONE_NUMBER = '+91 94204 79673';
 const PHONE_NUMBER_2 = '+91 95615 90211';
 const LOCATION_LINK = 'https://maps.app.goo.gl/2fS42WFUXTYc91Aj6';
 const INSTAGRAM_LINK = 'https://www.instagram.com/thepeepal_its_us/';
+
+const RESPONSIVE_WIDTHS = [480, 768, 1200];
+const OPTIMIZED_BASE_NAMES = new Set([
+  'PHOTO-2026-01-14-21-10-59',
+  'gallery-1',
+  'gallery-3',
+  'gallery-4',
+  'gallery-5',
+  'gallery-6',
+  'gallery-7',
+  'gallery-8',
+  'gallery-9',
+  'gallery-10',
+  'gallery-11',
+  'gallery-12',
+  'mud-dormitory',
+  'founder',
+  '1000236050_convert_2',
+  '1000236050_convert_3',
+  '1000236050_convert_6',
+  '1000236050_convert_7',
+  '1000236050_convert_8',
+  '1000236050_convert_9',
+  '1000236050_convert_10',
+]);
+
+type ResponsiveImageSources = {
+  avifSrcSet?: string;
+  webpSrcSet?: string;
+  sizes?: string;
+};
+
+function getResponsiveImageSources(src: string, sizes: string): ResponsiveImageSources {
+  const base = src.split('/').pop()?.replace(/\.[^.]+$/, '');
+
+  if (!base || !OPTIMIZED_BASE_NAMES.has(base)) {
+    return { sizes };
+  }
+
+  const avifSrcSet = RESPONSIVE_WIDTHS.map((width) => `/images/optimized/${base}-${width}.avif ${width}w`).join(', ');
+  const webpSrcSet = RESPONSIVE_WIDTHS.map((width) => `/images/optimized/${base}-${width}.webp ${width}w`).join(', ');
+
+  return { avifSrcSet, webpSrcSet, sizes };
+}
 
 // Gallery images
 const GALLERY_IMAGES = [
@@ -30,6 +75,12 @@ const GALLERY_IMAGES = [
   { src: '/images/gallery-4.jpg', alt: 'Guided nature walk through farm trails and countryside surrounding The Peepal Farm Stay' },
   { src: '/images/founder.png', alt: 'The Peepal Farm Stay founders working in organic farming fields demonstrating sustainable agriculture' },
   { src: '/images/gallery-6.jpg', alt: 'Peaceful farm landscape at sunset showcasing rural beauty near Nashik Maharashtra' },
+  { src: '/images/gallery-7.jpg', alt: 'Guest experience and relaxation space at The Peepal Farm Stay retreat center' },
+  { src: '/images/gallery-8.jpg', alt: 'Community gathering and social activities at The Peepal sustainable farm stay' },
+  { src: '/images/gallery-9.jpg', alt: 'Outdoor seating and meditation area surrounded by nature at The Peepal Farm Stay' },
+  { src: '/images/gallery-10.jpg', alt: 'Traditional décor and rustic interior design at The Peepal eco-lodge Nashik' },
+  { src: '/images/gallery-11.jpg', alt: 'Scenic views and landscape photography from The Peepal Farm Stay grounds' },
+  { src: '/images/gallery-12.jpg', alt: 'Evening activities and bonfire gathering area at The Peepal Farm Stay' },
 ];
 
 // Navigation Component
@@ -42,6 +93,7 @@ function Navigation({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode:
     { label: 'Home', path: '/' },
     { label: 'Gallery', path: '/gallery' },
     { label: 'Rooms', path: '/#stay' },
+    { label: 'Facilities', path: '/facilities' },
     { label: 'Location', path: '/#location' },
   ];
 
@@ -68,7 +120,14 @@ function Navigation({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode:
       <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-background/80 backdrop-blur-md border-b border-border/50">
         <button onClick={() => handleNav('/')} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden">
-            <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-full h-full object-cover scale-[1.5]" />
+            <OptimizedImage
+              src="/PHOTO-2026-01-14-21-10-59.jpg"
+              alt="The Peepal Logo"
+              className="w-full h-full object-cover scale-[1.5]"
+              loading="eager"
+              fetchPriority="high"
+              {...getResponsiveImageSources('/PHOTO-2026-01-14-21-10-59.jpg', '48px')}
+            />
           </div>
           <span className="font-mono text-xs md:text-sm uppercase tracking-widest font-medium">
             The Peepal
@@ -189,7 +248,13 @@ function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden">
-                <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-full h-full object-cover scale-[1.5]" />
+                  <OptimizedImage
+                    src="/PHOTO-2026-01-14-21-10-59.jpg"
+                    alt="The Peepal Logo"
+                    className="w-full h-full object-cover scale-[1.5]"
+                    loading="lazy"
+                    {...getResponsiveImageSources('/PHOTO-2026-01-14-21-10-59.jpg', '48px')}
+                  />
               </div>
               <span className="font-mono text-lg uppercase tracking-widest text-white">
                 The Peepal
@@ -330,11 +395,12 @@ function GalleryPage() {
               onClick={() => openLightbox(index)}
               className="group relative aspect-square overflow-hidden rounded-lg image-card"
             >
-              <img
+              <OptimizedImage
                 src={image.src}
                 alt={image.alt}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                {...getResponsiveImageSources(image.src, '(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw')}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
             </button>
@@ -376,10 +442,12 @@ function GalleryPage() {
             className="max-w-[90vw] max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <OptimizedImage
               src={GALLERY_IMAGES[currentImage].src}
               alt={GALLERY_IMAGES[currentImage].alt}
+              loading="eager"
               className="max-w-full max-h-[85vh] object-contain"
+              {...getResponsiveImageSources(GALLERY_IMAGES[currentImage].src, '90vw')}
             />
             <p className="text-white/80 text-center mt-4 text-sm md:text-base">
               {GALLERY_IMAGES[currentImage].alt}
@@ -390,6 +458,168 @@ function GalleryPage() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// Facilities Page Component
+function FacilitiesPage() {
+  return (
+    <div className="min-h-screen bg-[#F4F1EA] dark:bg-[#0a1f19] pt-20 md:pt-24">
+      {/* Hero Section */}
+      <div className="px-4 md:px-[6vw] py-12 md:py-16">
+        <h1 className="heading-display text-3xl md:text-5xl mb-4">Our Facilities</h1>
+        <p className="text-muted-foreground mb-12 max-w-2xl">
+          Discover our thoughtfully designed spaces for work, leisure, and community connection.
+        </p>
+      </div>
+
+      {/* Mudhouse Section */}
+      <div className="px-4 md:px-[6vw] py-12 md:py-20">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Image */}
+          <div className="rounded-lg overflow-hidden h-64 md:h-96 image-card order-2 md:order-1">
+            <OptimizedImage
+              src="/images/gallery-8.jpg"
+              alt="Mudhouse - Event and workshop space at The Peepal Farm Stay"
+              loading="eager"
+              className="w-full h-full object-cover"
+              {...getResponsiveImageSources('/images/gallery-8.jpg', '(max-width: 768px) 100vw, 50vw')}
+            />
+          </div>
+          {/* Content */}
+          <div className="order-1 md:order-2">
+            <h2 className="heading-display text-2xl md:text-4xl mb-4">
+              Mudhouse<br />
+              <span className="text-[#C8A45C]">Event & Workshop Space</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-6 text-sm md:text-base">
+              Our unique mudhouse is a naturally cooled, eco-friendly structure perfect for hosting meaningful gatherings. Built with traditional earth construction, it creates an intimate atmosphere for seminars, workshops, team building events, and community meetings.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                'Naturally cooled mud architecture',
+                'Seats up to 50 people comfortably',
+                'Perfect for workshops & seminars',
+                'Built-in natural acoustics',
+                'Wifi and power available',
+                'Flexible setup for your needs',
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-[#C8A45C] flex-shrink-0" />
+                  <span className="text-sm md:text-base text-muted-foreground">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Book Mudhouse
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Cafe Section */}
+      <div className="px-4 md:px-[6vw] py-12 md:py-20 bg-white/30 dark:bg-black/10">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Image */}
+          <div className="rounded-lg overflow-hidden h-64 md:h-96 image-card">
+            <OptimizedImage
+              src="/images/1000236050_convert_7.webp"
+              alt="Community Cafe - Farm fresh meals at The Peepal Farm Stay"
+              loading="lazy"
+              className="w-full h-full object-cover"
+              {...getResponsiveImageSources('/images/1000236050_convert_7.webp', '(max-width: 768px) 100vw, 50vw')}
+            />
+          </div>
+          {/* Content */}
+          <div>
+            <h2 className="heading-display text-2xl md:text-4xl mb-4">
+              Community<br />
+              <span className="text-[#C8A45C]">Cafe & Kitchen</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-6 text-sm md:text-base">
+              Experience farm-to-table dining in our community cafe. Our traditional clay stove kitchen prepares authentic meals using organic produce from our own fields. Whether you're a guest, workshop participant, or visitor, enjoy wholesome, delicious food in a warm and welcoming setting.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                'Farm fresh organic ingredients',
+                'Traditional and contemporary cuisine',
+                'Traditional clay stove cooking',
+                'Vegetarian & vegan options',
+                'Coffee, tea & fresh beverages',
+                'Group meal arrangements available',
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-[#C8A45C] flex-shrink-0" />
+                  <span className="text-sm md:text-base text-muted-foreground">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Reserve Cafe Space
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Other Facilities */}
+      <div className="px-4 md:px-[6vw] py-12 md:py-20">
+        <h2 className="heading-display text-2xl md:text-3xl mb-12">More Facilities</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          {[
+            {
+              title: 'Work & Co-working Spaces',
+              description: 'Quiet corners and collaborative spaces designed for remote workers and creative professionals. Experience productivity with a view of our farm landscape.',
+              features: ['High-speed WiFi', 'Peaceful work environment', 'Flexible hourly/daily rates', 'Power outlets everywhere'],
+            },
+            {
+              title: 'Recreational Activities',
+              description: 'From nature walks and yoga sessions to bonfire gatherings and agricultural experiences. We offer diverse activities for relaxation and learning.',
+              features: ['Guided farm tours', 'Yoga & meditation', 'Bonfires & gatherings', 'Nature walks', 'Agricultural workshops'],
+            },
+          ].map((facility, index) => (
+            <div key={index} className="p-8 paper-card rounded-lg">
+              <h3 className="heading-display text-lg md:text-xl mb-3 text-foreground flex items-center gap-2">
+                <span className="text-[#C8A45C]">●</span>
+                {facility.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-4 text-sm md:text-base">{facility.description}</p>
+              <ul className="space-y-2">
+                {facility.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-[#C8A45C] flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pricing Section */}
+      <div className="px-4 md:px-[6vw] py-12 md:py-20 bg-white/30 dark:bg-black/10">
+        <div className="max-w-2xl">
+          <h2 className="heading-display text-2xl md:text-3xl mb-4">Facility Charges</h2>
+          <p className="text-muted-foreground mb-6 text-sm md:text-base">
+            Each facility has flexible pricing options based on group size, duration, and specific requirements. We offer customized packages for workshops, team retreats, corporate events, and special occasions.
+          </p>
+          <div className="space-y-3 mb-8">
+            {['Mudhouse - Events & Workshops', 'Cafe - Group Meals & Catering', 'Co-working Spaces - Hourly/Daily', 'Activity Packages - Custom Rates'].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <Star className="w-4 h-4 text-[#C8A45C]" />
+                <span className="text-sm md:text-base text-muted-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
+          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex">
+            <MessageCircle className="w-4 h-4 mr-2" />
+            Get Custom Pricing
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
@@ -405,10 +635,13 @@ function HomePage() {
       <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10 min-h-screen pb-20">
         {/* Image - Desktop: left, Mobile: top */}
         <div className="absolute left-[4vw] md:left-[6vw] top-[12vh] md:top-[15vh] w-[92vw] md:w-[52vw] h-[42vh] md:h-[58vh] rounded-lg overflow-hidden image-card hero-image">
-          <img
+          <OptimizedImage
             src="/images/gallery-1.webp"
             alt="The Peepal Farm Stay eco-friendly mud villa entrance with natural landscaping in Nashik Maharashtra"
             className="w-full h-full object-cover scale-110"
+            loading="eager"
+            fetchPriority="high"
+            {...getResponsiveImageSources('/images/gallery-1.webp', '(max-width: 768px) 92vw, 52vw')}
           />
         </div>
         
@@ -416,7 +649,13 @@ function HomePage() {
         {/* To revert to leaf icon, replace the div below with: <Leaf className="w-full h-auto text-[#C8A45C]" strokeWidth={0.5} /> */}
         <div className="hidden md:block absolute right-[10vw] top-[16vh] w-[11vw] aspect-square hero-leaf opacity-60">
           <div className="w-full h-full rounded-full overflow-hidden">
-            <img src="/PHOTO-2026-01-14-21-10-59.jpg" alt="The Peepal Logo" className="w-full h-full object-cover scale-[1.5]" />
+            <OptimizedImage
+              src="/PHOTO-2026-01-14-21-10-59.jpg"
+              alt="The Peepal Logo"
+              className="w-full h-full object-cover scale-[1.5]"
+              loading="eager"
+              {...getResponsiveImageSources('/PHOTO-2026-01-14-21-10-59.jpg', '(max-width: 768px) 20vw, 11vw')}
+            />
           </div>
         </div>
         
@@ -464,10 +703,12 @@ function HomePage() {
       {/* Section 2: Welcome */}
       <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-20">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card welcome-image">
-          <img
+          <OptimizedImage
             src="/images/1000236050_convert_8.webp"
             alt="Traditional mud farmhouse exterior at The Peepal Farm Stay with eco-friendly architecture"
             className="w-full h-full object-cover"
+            loading="lazy"
+            {...getResponsiveImageSources('/images/1000236050_convert_8.webp', '(max-width: 768px) 92vw, 46vw')}
           />
         </div>
         <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card welcome-card" />
@@ -493,28 +734,29 @@ function HomePage() {
       {/* Section 3: Stay & Philosophy */}
       <section id="stay" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-30">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card stay-image">
-          <img
+          <OptimizedImage
             src="/images/gallery-3.webp"
             alt="Cozy eco-friendly mud villa interior room at The Peepal Farm Stay Nashik"
             className="w-full h-full object-cover"
             loading="lazy"
             style={{ objectPosition: 'center 30%' }}
+            {...getResponsiveImageSources('/images/gallery-3.webp', '(max-width: 768px) 92vw, 46vw')}
           />
         </div>
         <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card stay-card" />
-        <div className="absolute left-[4vw] md:left-[58vw] top-[48vh] md:top-[28vh] w-[92vw] md:w-[32vw] stay-headline stay-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[40vh] md:top-[28vh] w-[92vw] md:w-[32vw] stay-headline stay-text">
           <h2 className="heading-display text-[clamp(2rem,7vw,3.5rem)] md:text-[clamp(2.5rem,3.5vw,3.5rem)]">
             Stay With Us<br />
             <span className="text-[#C8A45C]">And Live Green</span>
           </h2>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[54vh] md:top-[38vh] w-[92vw] md:w-[32vw] stay-body stay-text">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[46vh] md:top-[38vh] w-[92vw] md:w-[32vw] stay-body stay-text">
           <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
             We use rainwater harvesting, organic farming, and minimal plastic. When you stay here, 
             you support a cleaner, quieter way of life rooted in sustainability.
           </p>
         </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[62vh] md:top-[48vh] stay-bullets stay-text space-y-2 md:space-y-3">
+        <div className="absolute left-[4vw] md:left-[58vw] top-[54vh] md:top-[48vh] stay-bullets stay-text space-y-2 md:space-y-3">
           {['Mud villas & dorms', 'Farm-to-table meals', 'Guided farm walks'].map((item) => (
             <div key={item} className="flex items-center gap-2 md:gap-3">
               <Check className="w-3 h-3 md:w-4 md:h-4 text-[#C8A45C]" />
@@ -528,10 +770,12 @@ function HomePage() {
       <section id="experience" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-40">
         <div className="px-4 md:px-[6vw]">
           <div className="w-full h-[30vh] md:h-[46vh] image-card experience-animate mb-8 md:mb-12">
-            <img
+            <OptimizedImage
               src="/images/1000236050_convert_9.webp"
               alt="Organic farming activities and agricultural experiences at The Peepal Farm Stay"
               className="w-full h-full object-cover"
+              loading="lazy"
+              {...getResponsiveImageSources('/images/1000236050_convert_9.webp', '(max-width: 768px) 100vw, 88vw')}
             />
           </div>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
@@ -546,10 +790,12 @@ function HomePage() {
               </p>
             </div>
             <div className="paper-card p-4 md:p-6 experience-animate">
-              <img
+              <OptimizedImage
                 src="/images/gallery-4.jpg"
                 alt="Afternoon chai under trees nature walk experience at The Peepal sustainable farm stay"
                 className="w-full h-40 md:h-48 object-cover rounded-lg mb-4"
+                loading="lazy"
+                {...getResponsiveImageSources('/images/gallery-4.jpg', '(max-width: 768px) 100vw, 45vw')}
               />
               <p className="label-mono text-muted-foreground text-xs md:text-sm">Afternoon chai under the trees</p>
             </div>
@@ -561,10 +807,12 @@ function HomePage() {
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {/* Mud Villa */}
               <div className="paper-card overflow-hidden experience-animate">
-                <img
-                  src="/assets-png-backup/1000236050_convert_10.png"
+                <OptimizedImage
+                  src="/images/1000236050_convert_10.webp"
                   alt="Private eco-friendly mud villa accommodation with traditional architecture at The Peepal Farm Stay Nashik"
                   className="w-full aspect-square object-cover"
+                  loading="lazy"
+                  {...getResponsiveImageSources('/images/1000236050_convert_10.webp', '(max-width: 768px) 100vw, 45vw')}
                 />
                 <div className="p-4 md:p-6">
                   <div className="flex justify-between items-start mb-3 md:mb-4">
@@ -590,10 +838,12 @@ function HomePage() {
 
               {/* Mud Dormitory */}
               <div className="paper-card overflow-hidden experience-animate">
-                <img
+                <OptimizedImage
                   src="/images/mud-dormitory.jpeg"
                   alt="Budget-friendly mud dormitory accommodation with sustainable earthen construction"
                   className="w-full aspect-square object-cover"
+                  loading="lazy"
+                  {...getResponsiveImageSources('/images/mud-dormitory.jpeg', '(max-width: 768px) 100vw, 45vw')}
                 />
                 <div className="p-4 md:p-6">
                   <div className="flex justify-between items-start mb-3 md:mb-4">
@@ -624,10 +874,12 @@ function HomePage() {
       {/* Section 5: Food & Fire */}
       <section id="food" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-50">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card food-image">
-          <img
+          <OptimizedImage
             src="/images/1000236050_convert_7.webp"
             alt="Traditional clay stove farm-to-table cooking at The Peepal organic farm stay"
             className="w-full h-full object-cover"
+            loading="lazy"
+            {...getResponsiveImageSources('/images/1000236050_convert_7.webp', '(max-width: 768px) 92vw, 46vw')}
           />
         </div>
         <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card food-card" />
@@ -655,10 +907,12 @@ function HomePage() {
       {/* Section 6: Hosts */}
       <section id="hosts" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-[60]">
         <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card hosts-image">
-          <img
+          <OptimizedImage
             src="/images/founder.png"
             alt="The Peepal Farm Stay founders in organic farming field practicing sustainable agriculture"
             className="w-full h-full object-cover"
+            loading="lazy"
+            {...getResponsiveImageSources('/images/founder.png', '(max-width: 768px) 92vw, 46vw')}
           />
         </div>
         <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card hosts-card" />
@@ -682,6 +936,8 @@ function HomePage() {
           </a>
         </div>
       </section>
+
+
 
       {/* Section 7: Location */}
       <section id="location" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-[70]">
@@ -801,10 +1057,12 @@ function HomePage() {
         <div className="px-4 md:px-[6vw]">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="image-card booking-animate">
-              <img
+              <OptimizedImage
                 src="/images/gallery-1.webp"
                 alt="Peaceful farm landscape and eco-retreat at The Peepal Farm Stay near Nashik Airport"
                 className="w-full h-[35vh] md:h-[50vh] object-cover"
+                loading="lazy"
+                {...getResponsiveImageSources('/images/gallery-1.webp', '(max-width: 768px) 100vw, 50vw')}
               />
             </div>
             <div>
@@ -866,6 +1124,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/facilities" element={<FacilitiesPage />} />
         </Routes>
         <Footer />
       </div>
