@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { 
-  Moon, Sun, MapPin, Phone, 
+import {
+  Moon, Sun, MapPin, Phone,
   ArrowRight, Star, Clock, Car, Check,
-  MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight, ChevronDown
+  MessageCircle, Instagram, X, Menu, ChevronLeft, ChevronRight, ChevronDown,
+  Home, Coffee, Laptop, Trees, Sparkles
 } from 'lucide-react';
 import { OptimizedImage } from './components/optimized-image';
 import './App.css';
@@ -463,163 +464,292 @@ function GalleryPage() {
 }
 
 // Facilities Page Component
+const FACILITIES = [
+  {
+    id: 'mudhouse',
+    icon: Home,
+    eyebrow: 'Events & Workshops',
+    title: 'The Mudhouse',
+    tagline: 'An earthen hall built for gathering.',
+    description: 'Our naturally-cooled mud hall is where ideas take shape. Built with traditional earth techniques and tuned for acoustics, it hosts everything from intimate retreats to 50-person workshops.',
+    image: '/images/gallery-8.jpg',
+    alt: 'Mudhouse event and workshop space with traditional earth architecture at The Peepal Farm Stay',
+    stats: [
+      { label: 'Capacity', value: 'Up to 50' },
+      { label: 'Cooling', value: 'Natural' },
+      { label: 'Setup', value: 'Flexible' },
+    ],
+    features: [
+      'Naturally cooled mud architecture',
+      'Built-in natural acoustics',
+      'Seats up to 50 comfortably',
+      'WiFi & power throughout',
+      'Perfect for workshops & seminars',
+      'Flexible setup for your needs',
+    ],
+    cta: 'Book the Mudhouse',
+  },
+  {
+    id: 'cafe',
+    icon: Coffee,
+    eyebrow: 'Dine & Gather',
+    title: 'Community Cafe',
+    tagline: 'Farm-to-table, cooked over fire.',
+    description: 'Our clay-stove kitchen serves meals built around whatever the farm yields that morning. Open to guests, workshop attendees, and visitors who stop in for chai.',
+    image: '/images/1000236050_convert_7.webp',
+    alt: 'Traditional clay stove kitchen serving farm-to-table meals at The Peepal community cafe',
+    stats: [
+      { label: 'Style', value: 'Farm-to-table' },
+      { label: 'Stove', value: 'Wood-fired' },
+      { label: 'Diets', value: 'Veg & vegan' },
+    ],
+    features: [
+      'Farm-fresh organic ingredients',
+      'Traditional clay stove cooking',
+      'Vegetarian & vegan options',
+      'Regional & contemporary cuisine',
+      'Coffee, chai & fresh beverages',
+      'Group meals & catering',
+    ],
+    cta: 'Reserve the Cafe',
+  },
+  {
+    id: 'coworking',
+    icon: Laptop,
+    eyebrow: 'Work Remotely',
+    title: 'Co-working Nooks',
+    tagline: 'Work with a view of the farm.',
+    description: 'Quiet corners, open-air verandas, and shared tables. High-speed WiFi throughout. Pay by the hour, by the day, or settle in for a week and let the rhythm of the farm set your pace.',
+    image: '/images/gallery-11.jpg',
+    alt: 'Peaceful co-working area with farm views and natural light at The Peepal Farm Stay',
+    stats: [
+      { label: 'WiFi', value: 'High-speed' },
+      { label: 'Power', value: 'Every seat' },
+      { label: 'Rates', value: 'Hourly / Daily' },
+    ],
+    features: [
+      'High-speed WiFi throughout',
+      'Peaceful work environment',
+      'Flexible hourly & daily rates',
+      'Power outlets at every seat',
+      'Indoor & outdoor options',
+      'Fresh meals a few steps away',
+    ],
+    cta: 'Reserve a Desk',
+  },
+  {
+    id: 'activities',
+    icon: Trees,
+    eyebrow: 'Experience the Farm',
+    title: 'Activities & Retreats',
+    tagline: 'Slow down, learn something new.',
+    description: 'Guided nature walks, sunrise yoga, bonfire evenings, and hands-on agricultural workshops. Every activity is built around the farm and the people who keep it running.',
+    image: '/images/gallery-12.jpg',
+    alt: 'Evening activities and bonfire gathering area at The Peepal Farm Stay',
+    stats: [
+      { label: 'Guided by', value: 'Farm hosts' },
+      { label: 'Group size', value: '1 – 30' },
+      { label: 'Availability', value: 'Year-round' },
+    ],
+    features: [
+      'Guided farm tours',
+      'Yoga & meditation sessions',
+      'Bonfire gatherings',
+      'Nature walks & birding',
+      'Agricultural workshops',
+      'Custom retreats available',
+    ],
+    cta: 'Plan Your Retreat',
+  },
+];
+
 function FacilitiesPage() {
+  const handleAnchorClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <div className="min-h-screen bg-[#F4F1EA] dark:bg-[#0a1f19] pt-20 md:pt-24">
-      {/* Hero Section */}
-      <div className="px-4 md:px-[6vw] py-12 md:py-16">
-        <h1 className="heading-display text-3xl md:text-5xl mb-4">Our Facilities</h1>
-        <p className="text-muted-foreground mb-12 max-w-2xl">
-          Discover our thoughtfully designed spaces for work, leisure, and community connection.
-        </p>
-      </div>
-
-      {/* Mudhouse Section */}
-      <div className="px-4 md:px-[6vw] py-12 md:py-20">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Image */}
-          <div className="rounded-lg overflow-hidden h-64 md:h-96 image-card order-2 md:order-1">
-            <OptimizedImage
-              src="/images/gallery-8.jpg"
-              alt="Mudhouse - Event and workshop space at The Peepal Farm Stay"
-              loading="eager"
-              className="w-full h-full object-cover"
-              {...getResponsiveImageSources('/images/gallery-8.jpg', '(max-width: 768px) 100vw, 50vw')}
-            />
-          </div>
-          {/* Content */}
-          <div className="order-1 md:order-2">
-            <h2 className="heading-display text-2xl md:text-4xl mb-4">
-              Mudhouse<br />
-              <span className="text-[#C8A45C]">Event & Workshop Space</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6 text-sm md:text-base">
-              Our unique mudhouse is a naturally cooled, eco-friendly structure perfect for hosting meaningful gatherings. Built with traditional earth construction, it creates an intimate atmosphere for seminars, workshops, team building events, and community meetings.
+    <div className="min-h-screen bg-[#F4F1EA] dark:bg-[#0a1f19]">
+      {/* Hero Banner */}
+      <section className="relative h-[70vh] md:h-[80vh] min-h-[500px] overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/gallery-8.jpg"
+            alt="The Peepal Farm Stay facilities — mudhouse, cafe, and co-working spaces"
+            className="w-full h-full object-cover scale-105"
+            loading="eager"
+            fetchPriority="high"
+            {...getResponsiveImageSources('/images/gallery-8.jpg', '100vw')}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-[#F4F1EA] dark:to-[#0a1f19]" />
+        </div>
+        <div className="relative h-full flex items-end pb-16 md:pb-24">
+          <div className="px-4 md:px-[6vw] w-full max-w-5xl">
+            <span className="label-mono text-[#C8A45C] text-xs md:text-sm block mb-3 md:mb-4">
+              Spaces for humans
+            </span>
+            <h1 className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3.5rem,7vw,6.5rem)] text-white mb-4 md:mb-6 leading-[0.9]">
+              Our<br />
+              <span className="text-[#C8A45C]">Facilities</span>
+            </h1>
+            <p className="text-white/85 max-w-2xl text-base md:text-lg leading-relaxed">
+              Four thoughtfully-designed spaces for work, rest, community, and practice — each built with the same philosophy: slow, simple, close to the land.
             </p>
-            <ul className="space-y-3 mb-8">
-              {[
-                'Naturally cooled mud architecture',
-                'Seats up to 50 people comfortably',
-                'Perfect for workshops & seminars',
-                'Built-in natural acoustics',
-                'Wifi and power available',
-                'Flexible setup for your needs',
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-[#C8A45C] flex-shrink-0" />
-                  <span className="text-sm md:text-base text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Book Mudhouse
-            </a>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Cafe Section */}
-      <div className="px-4 md:px-[6vw] py-12 md:py-20 bg-white/30 dark:bg-black/10">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Image */}
-          <div className="rounded-lg overflow-hidden h-64 md:h-96 image-card">
-            <OptimizedImage
-              src="/images/1000236050_convert_7.webp"
-              alt="Community Cafe - Farm fresh meals at The Peepal Farm Stay"
-              loading="lazy"
-              className="w-full h-full object-cover"
-              {...getResponsiveImageSources('/images/1000236050_convert_7.webp', '(max-width: 768px) 100vw, 50vw')}
-            />
-          </div>
-          {/* Content */}
-          <div>
-            <h2 className="heading-display text-2xl md:text-4xl mb-4">
-              Community<br />
-              <span className="text-[#C8A45C]">Cafe & Kitchen</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6 text-sm md:text-base">
-              Experience farm-to-table dining in our community cafe. Our traditional clay stove kitchen prepares authentic meals using organic produce from our own fields. Whether you're a guest, workshop participant, or visitor, enjoy wholesome, delicious food in a warm and welcoming setting.
-            </p>
-            <ul className="space-y-3 mb-8">
-              {[
-                'Farm fresh organic ingredients',
-                'Traditional and contemporary cuisine',
-                'Traditional clay stove cooking',
-                'Vegetarian & vegan options',
-                'Coffee, tea & fresh beverages',
-                'Group meal arrangements available',
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-[#C8A45C] flex-shrink-0" />
-                  <span className="text-sm md:text-base text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Reserve Cafe Space
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Other Facilities */}
-      <div className="px-4 md:px-[6vw] py-12 md:py-20">
-        <h2 className="heading-display text-2xl md:text-3xl mb-12">More Facilities</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {[
-            {
-              title: 'Work & Co-working Spaces',
-              description: 'Quiet corners and collaborative spaces designed for remote workers and creative professionals. Experience productivity with a view of our farm landscape.',
-              features: ['High-speed WiFi', 'Peaceful work environment', 'Flexible hourly/daily rates', 'Power outlets everywhere'],
-            },
-            {
-              title: 'Recreational Activities',
-              description: 'From nature walks and yoga sessions to bonfire gatherings and agricultural experiences. We offer diverse activities for relaxation and learning.',
-              features: ['Guided farm tours', 'Yoga & meditation', 'Bonfires & gatherings', 'Nature walks', 'Agricultural workshops'],
-            },
-          ].map((facility, index) => (
-            <div key={index} className="p-8 paper-card rounded-lg">
-              <h3 className="heading-display text-lg md:text-xl mb-3 text-foreground flex items-center gap-2">
-                <span className="text-[#C8A45C]">●</span>
-                {facility.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed mb-4 text-sm md:text-base">{facility.description}</p>
-              <ul className="space-y-2">
-                {facility.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
-                    <Check className="w-4 h-4 text-[#C8A45C] flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Pricing Section */}
-      <div className="px-4 md:px-[6vw] py-12 md:py-20 bg-white/30 dark:bg-black/10">
-        <div className="max-w-2xl">
-          <h2 className="heading-display text-2xl md:text-3xl mb-4">Facility Charges</h2>
-          <p className="text-muted-foreground mb-6 text-sm md:text-base">
-            Each facility has flexible pricing options based on group size, duration, and specific requirements. We offer customized packages for workshops, team retreats, corporate events, and special occasions.
-          </p>
-          <div className="space-y-3 mb-8">
-            {['Mudhouse - Events & Workshops', 'Cafe - Group Meals & Catering', 'Co-working Spaces - Hourly/Daily', 'Activity Packages - Custom Rates'].map((item) => (
-              <div key={item} className="flex items-center gap-3">
-                <Star className="w-4 h-4 text-[#C8A45C]" />
-                <span className="text-sm md:text-base text-muted-foreground">{item}</span>
-              </div>
+      {/* Sticky Quick Nav */}
+      <nav className="sticky top-16 md:top-20 z-30 bg-[#F4F1EA]/95 dark:bg-[#0a1f19]/95 backdrop-blur-md border-y border-border/50">
+        <div className="px-4 md:px-[6vw]">
+          <div className="flex gap-2 md:gap-3 overflow-x-auto py-3 md:py-4 scrollbar-hide">
+            {FACILITIES.map((f) => (
+              <a
+                key={f.id}
+                href={`#${f.id}`}
+                onClick={(e) => handleAnchorClick(e, f.id)}
+                className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-full bg-background border border-border hover:bg-[#C8A45C]/10 hover:border-[#C8A45C] transition-colors whitespace-nowrap text-xs md:text-sm font-medium"
+              >
+                <f.icon className="w-4 h-4 text-[#C8A45C]" />
+                <span>{f.title}</span>
+              </a>
             ))}
           </div>
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex">
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Get Custom Pricing
-          </a>
         </div>
-      </div>
+      </nav>
+
+      {/* Facility Sections */}
+      {FACILITIES.map((f, i) => {
+        const Icon = f.icon;
+        const isReversed = i % 2 === 1;
+        return (
+          <section
+            key={f.id}
+            id={f.id}
+            className={`relative py-16 md:py-24 scroll-mt-32 md:scroll-mt-40 ${i % 2 === 1 ? 'bg-white/30 dark:bg-black/10' : ''}`}
+          >
+            <div className="px-4 md:px-[6vw]">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                {/* Image */}
+                <div
+                  className={`relative aspect-[4/3] md:aspect-[5/4] rounded-lg overflow-hidden image-card ${
+                    isReversed ? 'md:order-2' : 'md:order-1'
+                  }`}
+                >
+                  <OptimizedImage
+                    src={f.image}
+                    alt={f.alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    {...getResponsiveImageSources(f.image, '(max-width: 768px) 100vw, 45vw')}
+                  />
+                  <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F4F1EA]/90 dark:bg-[#0a1f19]/90 backdrop-blur-sm">
+                    <Icon className="w-4 h-4 text-[#C8A45C]" />
+                    <span className="label-mono text-[10px] md:text-xs">{f.eyebrow}</span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className={isReversed ? 'md:order-1' : 'md:order-2'}>
+                  <h2 className="heading-display text-3xl md:text-5xl mb-3 md:mb-4 leading-[0.95]">
+                    {f.title}
+                  </h2>
+                  <p className="text-[#C8A45C] font-medium text-base md:text-lg mb-4 md:mb-6 italic">
+                    {f.tagline}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
+                    {f.description}
+                  </p>
+
+                  {/* Stats strip */}
+                  <div className="grid grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-8 pb-6 md:pb-8 border-b border-border">
+                    {f.stats.map((s) => (
+                      <div key={s.label}>
+                        <div className="heading-display text-lg md:text-2xl text-[#C8A45C] leading-tight">
+                          {s.value}
+                        </div>
+                        <div className="label-mono text-[10px] md:text-xs text-muted-foreground mt-1">
+                          {s.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Feature grid */}
+                  <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-2 md:gap-y-3 mb-6 md:mb-8">
+                    {f.features.map((feat) => (
+                      <li key={feat} className="flex items-start gap-2">
+                        <Check className="w-4 h-4 md:w-5 md:h-5 text-[#C8A45C] flex-shrink-0 mt-0.5" />
+                        <span className="text-sm md:text-base text-muted-foreground leading-snug">
+                          {feat}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                  >
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    {f.cta}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Closing CTA Banner */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/gallery-6.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+            loading="lazy"
+            {...getResponsiveImageSources('/images/gallery-6.jpg', '100vw')}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0E3A2F]/95 via-[#0E3A2F]/85 to-[#0E3A2F]/70" />
+        </div>
+        <div className="relative px-4 md:px-[6vw] py-20 md:py-32">
+          <div className="max-w-2xl">
+            <span className="label-mono text-[#C8A45C] text-xs md:text-sm flex items-center gap-2 mb-3 md:mb-4">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+              Build something together
+            </span>
+            <h2 className="heading-display text-3xl md:text-5xl text-white mb-4 md:mb-6 leading-[0.95]">
+              Planning a retreat,<br />
+              <span className="text-[#C8A45C]">workshop,</span> or offsite?
+            </h2>
+            <p className="text-white/85 text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-xl">
+              We build custom packages around your group — from a half-day workshop in the mudhouse to a week-long retreat with meals, activities, and stay included. Tell us what you have in mind and we'll put together a plan.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Chat on WhatsApp
+              </a>
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                className="inline-flex items-center justify-center px-6 py-3 border-2 border-white/30 text-white font-mono text-sm uppercase tracking-wider rounded-sm hover:bg-white/10 hover:border-white/60 transition-colors"
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                Call us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

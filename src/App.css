@@ -114,6 +114,16 @@ img {
   aspect-ratio: 1 / 1;
 }
 
+/* Hide scrollbar while keeping scroll (for sticky facility nav pills) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* WhatsApp button pulse animation */
 @keyframes pulse-green {
   0%, 100% {
