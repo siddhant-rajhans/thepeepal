@@ -57,36 +57,23 @@ a:focus-visible {
 
 /* Mobile-first responsive adjustments */
 @media (max-width: 768px) {
-  .section-pinned {
-    min-height: 100svh;
-    height: auto;
-    min-height: 100vh;
-  }
-  
   .heading-display {
     letter-spacing: -0.01em;
     line-height: 1;
   }
-  
+
   .image-card {
     border-radius: 8px;
   }
-  
+
   .paper-card {
     border-radius: 8px;
   }
-  
+
   .btn-primary,
   .btn-secondary {
     padding: 0.75rem 1.25rem;
     font-size: 0.875rem;
-  }
-}
-
-/* Tablet adjustments */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .section-pinned {
-    min-height: 100vh;
   }
 }
 

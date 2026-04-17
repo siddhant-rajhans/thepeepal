@@ -23,7 +23,7 @@ const sourceImages = [
   '/images/gallery-11.jpg',
   '/images/gallery-12.jpg',
   '/images/mud-dormitory.jpeg',
-  '/images/founder.png',
+  '/images/founder.jpg',
   '/images/1000236050_convert_2.webp',
   '/images/1000236050_convert_3.webp',
   '/images/1000236050_convert_6.webp',

@@ -103,13 +103,18 @@
   }
 
   .section-pinned {
-    width: 100vw;
-    min-height: 70vh;
-    height: auto;
-    max-height: 85vh;
+    width: 100%;
     position: relative;
-    overflow: hidden;
     padding: 2rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-pinned {
+      min-height: 70vh;
+      max-height: 85vh;
+      height: auto;
+      overflow: hidden;
+    }
   }
 
   .heading-display {

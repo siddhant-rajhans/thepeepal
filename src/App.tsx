@@ -66,14 +66,14 @@ const GALLERY_IMAGES = [
   { src: '/images/gallery-1.webp', alt: 'The Peepal Farm Stay main entrance with traditional mud architecture and natural landscaping in Nashik' },
   { src: '/images/1000236050_convert_8.webp', alt: 'Eco-friendly mud farmhouse exterior showcasing sustainable earthen construction techniques' },
   { src: '/images/gallery-3.webp', alt: 'Cozy mud villa interior room with traditional decor at The Peepal Farm Stay' },
-  { src: '/assets-png-backup/1000236050_convert_10.png', alt: 'Private eco-friendly mud villa accommodation with rustic charm and modern comfort' },
+  { src: '/images/1000236050_convert_10.webp', alt: 'Private eco-friendly mud villa accommodation with rustic charm and modern comfort' },
   { src: '/images/mud-dormitory.jpeg', alt: 'Budget-friendly mud dormitory with sustainable construction for backpackers and groups' },
   { src: '/images/1000236050_convert_9.webp', alt: 'Hands-on organic farming activities and agricultural experiences for guests' },
   { src: '/images/1000236050_convert_7.webp', alt: 'Traditional clay stove kitchen cooking farm-to-table meals with organic ingredients' },
   { src: '/images/gallery-5.jpg', alt: 'Farm fresh organic meal prepared with locally sourced vegetables and traditional recipes' },
   { src: '/images/1000236050_convert_6.webp', alt: 'Organic vegetable garden with sustainable farming practices and rainwater harvesting' },
   { src: '/images/gallery-4.jpg', alt: 'Guided nature walk through farm trails and countryside surrounding The Peepal Farm Stay' },
-  { src: '/images/founder.png', alt: 'The Peepal Farm Stay founders working in organic farming fields demonstrating sustainable agriculture' },
+  { src: '/images/founder.jpg', alt: 'The Peepal Farm Stay founders working in organic farming fields demonstrating sustainable agriculture' },
   { src: '/images/gallery-6.jpg', alt: 'Peaceful farm landscape at sunset showcasing rural beauty near Nashik Maharashtra' },
   { src: '/images/gallery-7.jpg', alt: 'Guest experience and relaxation space at The Peepal Farm Stay retreat center' },
   { src: '/images/gallery-8.jpg', alt: 'Community gathering and social activities at The Peepal sustainable farm stay' },
@@ -631,145 +631,151 @@ function HomePage() {
       {/* Grain Overlay */}
       <div className="grain-overlay" />
 
-      {/* Section 1: Hero - Fixed Layout */}
-      <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10 min-h-screen pb-20">
-        {/* Image - Desktop: left, Mobile: top */}
-        <div className="absolute left-[4vw] md:left-[6vw] top-[12vh] md:top-[15vh] w-[92vw] md:w-[52vw] h-[42vh] md:h-[58vh] rounded-lg overflow-hidden image-card hero-image">
-          <OptimizedImage
-            src="/images/gallery-1.webp"
-            alt="The Peepal Farm Stay eco-friendly mud villa entrance with natural landscaping in Nashik Maharashtra"
-            className="w-full h-full object-cover scale-110"
-            loading="eager"
-            fetchPriority="high"
-            {...getResponsiveImageSources('/images/gallery-1.webp', '(max-width: 768px) 92vw, 52vw')}
-          />
-        </div>
-        
-        {/* Logo - Hidden on mobile */}
-        {/* To revert to leaf icon, replace the div below with: <Leaf className="w-full h-auto text-[#C8A45C]" strokeWidth={0.5} /> */}
-        <div className="hidden md:block absolute right-[10vw] top-[16vh] w-[11vw] aspect-square hero-leaf opacity-60">
-          <div className="w-full h-full rounded-full overflow-hidden">
+      {/* Section 1: Hero */}
+      <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-10 md:min-h-screen md:pb-20">
+        {/* Mobile: natural flex flow | Desktop: keeps absolute layout */}
+        <div className="flex flex-col gap-6 px-4 pt-24 pb-12 md:block md:p-0">
+          {/* Location label */}
+          <div className="label-mono text-muted-foreground text-xs md:text-sm md:absolute md:left-[6vw] md:top-[12vh]">
+            Nashik, Maharashtra
+          </div>
+
+          {/* Image */}
+          <div className="w-full h-[42vh] rounded-lg overflow-hidden image-card md:absolute md:left-[6vw] md:top-[15vh] md:w-[52vw] md:h-[58vh]">
             <OptimizedImage
-              src="/PHOTO-2026-01-14-21-10-59.jpg"
-              alt="The Peepal Logo"
-              className="w-full h-full object-cover scale-[1.5]"
+              src="/images/gallery-1.webp"
+              alt="The Peepal Farm Stay eco-friendly mud villa entrance with natural landscaping in Nashik Maharashtra"
+              className="w-full h-full object-cover scale-110"
               loading="eager"
-              {...getResponsiveImageSources('/PHOTO-2026-01-14-21-10-59.jpg', '(max-width: 768px) 20vw, 11vw')}
+              fetchPriority="high"
+              {...getResponsiveImageSources('/images/gallery-1.webp', '(max-width: 768px) 92vw, 52vw')}
             />
           </div>
-        </div>
-        
-        {/* Headline - Desktop: slightly left of right, Mobile: below image */}
-        <div className="absolute left-[4vw] md:left-auto md:right-[15vw] top-[56vh] md:top-[24vh] hero-headline">
-          <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block leading-[0.9]">The</span>
-          <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block leading-[0.9]">Peepal</span>
-          <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block text-[#C8A45C] leading-[0.9]">Farm Stay</span>
-        </div>
-        
-        {/* Subtext - Desktop: right side, Mobile: below headline */}
-        <div className="absolute left-[4vw] md:left-auto md:right-[6vw] top-[74vh] md:top-[48vh] w-[92vw] md:w-[32vw] hero-subtext">
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Eco-friendly mud homes in the heart of Maharashtra. Experience sustainable living in harmony with nature.
-          </p>
-        </div>
-        
-        {/* CTA */}
-        <div className="absolute left-[4vw] md:left-auto md:right-[15vw] top-[82vh] md:top-[58vh] hero-cta">
-          <a 
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Book on WhatsApp
-          </a>
-        </div>
-        
-        {/* Location label */}
-        <div className="absolute left-[4vw] md:left-[6vw] top-[10vh] label-mono text-muted-foreground text-xs md:text-sm">
-          Nashik, Maharashtra
-        </div>
-        
-        {/* Scroll Indicator */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 flex flex-col items-center gap-2 hero-scroll-indicator z-10">
-          <span className="label-mono text-muted-foreground text-xs">Scroll</span>
-          <div>
-            <ChevronDown className="w-5 h-5 text-[#C8A45C]" />
+
+          {/* Logo - Desktop only */}
+          <div className="hidden md:block absolute right-[10vw] top-[16vh] w-[11vw] aspect-square hero-leaf opacity-60">
+            <div className="w-full h-full rounded-full overflow-hidden">
+              <OptimizedImage
+                src="/PHOTO-2026-01-14-21-10-59.jpg"
+                alt="The Peepal Logo"
+                className="w-full h-full object-cover scale-[1.5]"
+                loading="eager"
+                {...getResponsiveImageSources('/PHOTO-2026-01-14-21-10-59.jpg', '(max-width: 768px) 20vw, 11vw')}
+              />
+            </div>
+          </div>
+
+          {/* Headline */}
+          <div className="md:absolute md:left-auto md:right-[15vw] md:top-[24vh]">
+            <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block leading-[0.9]">The</span>
+            <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block leading-[0.9]">Peepal</span>
+            <span className="heading-display text-[clamp(2.5rem,10vw,6rem)] md:text-[clamp(3rem,5vw,5rem)] block text-[#C8A45C] leading-[0.9]">Farm Stay</span>
+          </div>
+
+          {/* Subtext */}
+          <div className="md:absolute md:left-auto md:right-[6vw] md:top-[48vh] md:w-[32vw]">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              Eco-friendly mud homes in the heart of Maharashtra. Experience sustainable living in harmony with nature.
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="md:absolute md:left-auto md:right-[15vw] md:top-[58vh]">
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Book on WhatsApp
+            </a>
+          </div>
+
+          {/* Scroll Indicator - Desktop only */}
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bottom-12 flex-col items-center gap-2 z-10">
+            <span className="label-mono text-muted-foreground text-xs">Scroll</span>
+            <div>
+              <ChevronDown className="w-5 h-5 text-[#C8A45C]" />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Section 2: Welcome */}
       <section className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-20">
-        <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card welcome-image">
-          <OptimizedImage
-            src="/images/1000236050_convert_8.webp"
-            alt="Traditional mud farmhouse exterior at The Peepal Farm Stay with eco-friendly architecture"
-            className="w-full h-full object-cover"
-            loading="lazy"
-            {...getResponsiveImageSources('/images/1000236050_convert_8.webp', '(max-width: 768px) 92vw, 46vw')}
-          />
-        </div>
-        <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card welcome-card" />
-        <div className="absolute left-[4vw] md:left-[58vw] top-[48vh] md:top-[24vh] w-[92vw] md:w-[32vw] welcome-title welcome-text">
-          <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
-            Welcome to Our Farm Stay
-          </h2>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[58vh] md:top-[42vh] w-[92vw] md:w-[32vw] welcome-body welcome-text">
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-            Experience the perfect blend of rustic charm and modern comfort. Our eco-friendly mud homes 
-            are built to stay cool, breathe easy, and help you slow down and reconnect with nature.
-          </p>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[72vh] md:top-[58vh] welcome-cta welcome-text">
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-            Explore on WhatsApp
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </a>
+        <div className="flex flex-col gap-6 px-4 py-12 md:block md:p-0">
+          <div className="w-full h-[32vh] image-card md:absolute md:left-[6vw] md:top-[18vh] md:w-[46vw] md:h-[64vh]">
+            <OptimizedImage
+              src="/images/1000236050_convert_8.webp"
+              alt="Traditional mud farmhouse exterior at The Peepal Farm Stay with eco-friendly architecture"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              {...getResponsiveImageSources('/images/1000236050_convert_8.webp', '(max-width: 768px) 92vw, 46vw')}
+            />
+          </div>
+          <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card" />
+          <div className="md:absolute md:left-[58vw] md:top-[24vh] md:w-[32vw]">
+            <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
+              Welcome to Our Farm Stay
+            </h2>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[42vh] md:w-[32vw]">
+            <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+              Experience the perfect blend of rustic charm and modern comfort. Our eco-friendly mud homes
+              are built to stay cool, breathe easy, and help you slow down and reconnect with nature.
+            </p>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[58vh]">
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              Explore on WhatsApp
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Section 3: Stay & Philosophy */}
       <section id="stay" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-30">
-        <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card stay-image">
-          <OptimizedImage
-            src="/images/gallery-3.webp"
-            alt="Cozy eco-friendly mud villa interior room at The Peepal Farm Stay Nashik"
-            className="w-full h-full object-cover"
-            loading="lazy"
-            style={{ objectPosition: 'center 30%' }}
-            {...getResponsiveImageSources('/images/gallery-3.webp', '(max-width: 768px) 92vw, 46vw')}
-          />
-        </div>
-        <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card stay-card" />
-        <div className="absolute left-[4vw] md:left-[58vw] top-[40vh] md:top-[28vh] w-[92vw] md:w-[32vw] stay-headline stay-text">
-          <h2 className="heading-display text-[clamp(2rem,7vw,3.5rem)] md:text-[clamp(2.5rem,3.5vw,3.5rem)]">
-            Stay With Us<br />
-            <span className="text-[#C8A45C]">And Live Green</span>
-          </h2>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[46vh] md:top-[38vh] w-[92vw] md:w-[32vw] stay-body stay-text">
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-            We use rainwater harvesting, organic farming, and minimal plastic. When you stay here, 
-            you support a cleaner, quieter way of life rooted in sustainability.
-          </p>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[54vh] md:top-[48vh] stay-bullets stay-text space-y-2 md:space-y-3">
-          {['Mud villas & dorms', 'Farm-to-table meals', 'Guided farm walks'].map((item) => (
-            <div key={item} className="flex items-center gap-2 md:gap-3">
-              <Check className="w-3 h-3 md:w-4 md:h-4 text-[#C8A45C]" />
-              <span className="label-mono text-muted-foreground text-xs md:text-sm">{item}</span>
-            </div>
-          ))}
+        <div className="flex flex-col gap-6 px-4 py-12 md:block md:p-0">
+          <div className="w-full h-[32vh] image-card md:absolute md:left-[6vw] md:top-[18vh] md:w-[46vw] md:h-[64vh]">
+            <OptimizedImage
+              src="/images/gallery-3.webp"
+              alt="Cozy eco-friendly mud villa interior room at The Peepal Farm Stay Nashik"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              style={{ objectPosition: 'center 30%' }}
+              {...getResponsiveImageSources('/images/gallery-3.webp', '(max-width: 768px) 92vw, 46vw')}
+            />
+          </div>
+          <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card" />
+          <div className="md:absolute md:left-[58vw] md:top-[28vh] md:w-[32vw]">
+            <h2 className="heading-display text-[clamp(2rem,7vw,3.5rem)] md:text-[clamp(2.5rem,3.5vw,3.5rem)]">
+              Stay With Us<br />
+              <span className="text-[#C8A45C]">And Live Green</span>
+            </h2>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[38vh] md:w-[32vw]">
+            <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+              We use rainwater harvesting, organic farming, and minimal plastic. When you stay here,
+              you support a cleaner, quieter way of life rooted in sustainability.
+            </p>
+          </div>
+          <div className="space-y-2 md:space-y-3 md:absolute md:left-[58vw] md:top-[48vh]">
+            {['Mud villas & dorms', 'Farm-to-table meals', 'Guided farm walks'].map((item) => (
+              <div key={item} className="flex items-center gap-2 md:gap-3">
+                <Check className="w-3 h-3 md:w-4 md:h-4 text-[#C8A45C]" />
+                <span className="label-mono text-muted-foreground text-xs md:text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Section 4: The Experience */}
       <section id="experience" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-40">
         <div className="px-4 md:px-[6vw]">
-          <div className="w-full h-[30vh] md:h-[46vh] image-card experience-animate mb-8 md:mb-12">
+          <div className="w-full h-[30vh] md:h-[46vh] image-card mb-8 md:mb-12">
             <OptimizedImage
               src="/images/1000236050_convert_9.webp"
               alt="Organic farming activities and agricultural experiences at The Peepal Farm Stay"
@@ -780,16 +786,16 @@ function HomePage() {
           </div>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             <div>
-              <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] experience-animate mb-4 md:mb-6">
+              <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] mb-4 md:mb-6">
                 The Experience
               </h2>
-              <p className="text-muted-foreground leading-relaxed experience-animate text-sm md:text-base">
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
                 Start the day with a farm walk. Help in the fields. Eat food cooked on fire. 
                 Sleep early. Wake up to birds. This is life at The Peepal—simple, intentional, 
                 and deeply connected to the land.
               </p>
             </div>
-            <div className="paper-card p-4 md:p-6 experience-animate">
+            <div className="paper-card p-4 md:p-6">
               <OptimizedImage
                 src="/images/gallery-4.jpg"
                 alt="Afternoon chai under trees nature walk experience at The Peepal sustainable farm stay"
@@ -803,10 +809,10 @@ function HomePage() {
 
           {/* Accommodation Cards */}
           <div className="mt-12 md:mt-20">
-            <h3 className="heading-display text-xl md:text-2xl mb-6 md:mb-8 experience-animate">Choose Your Stay</h3>
+            <h3 className="heading-display text-xl md:text-2xl mb-6 md:mb-8">Choose Your Stay</h3>
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {/* Mud Villa */}
-              <div className="paper-card overflow-hidden experience-animate">
+              <div className="paper-card overflow-hidden">
                 <OptimizedImage
                   src="/images/1000236050_convert_10.webp"
                   alt="Private eco-friendly mud villa accommodation with traditional architecture at The Peepal Farm Stay Nashik"
@@ -837,7 +843,7 @@ function HomePage() {
               </div>
 
               {/* Mud Dormitory */}
-              <div className="paper-card overflow-hidden experience-animate">
+              <div className="paper-card overflow-hidden">
                 <OptimizedImage
                   src="/images/mud-dormitory.jpeg"
                   alt="Budget-friendly mud dormitory accommodation with sustainable earthen construction"
@@ -873,67 +879,71 @@ function HomePage() {
 
       {/* Section 5: Food & Fire */}
       <section id="food" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-50">
-        <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card food-image">
-          <OptimizedImage
-            src="/images/1000236050_convert_7.webp"
-            alt="Traditional clay stove farm-to-table cooking at The Peepal organic farm stay"
-            className="w-full h-full object-cover"
-            loading="lazy"
-            {...getResponsiveImageSources('/images/1000236050_convert_7.webp', '(max-width: 768px) 92vw, 46vw')}
-          />
-        </div>
-        <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card food-card" />
-        <div className="absolute left-[4vw] md:left-[58vw] top-[48vh] md:top-[24vh] w-[92vw] md:w-[32vw] food-headline food-text">
-          <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
-            Food Cooked<br />
-            <span className="text-[#C8A45C]">With Fire</span><br />
-            And Love
-          </h2>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[60vh] md:top-[48vh] w-[92vw] md:w-[32vw] food-body food-text">
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-            Most meals come from the farm. Spices are local. Recipes are traditional. 
-            The stove is wood-fired—and the flavor is real.
-          </p>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[70vh] md:top-[62vh] w-[92vw] md:w-[32vw] food-cta food-text">
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm md:text-base">
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Ask about meals
-          </a>
+        <div className="flex flex-col gap-6 px-4 py-12 md:block md:p-0">
+          <div className="w-full h-[32vh] image-card md:absolute md:left-[6vw] md:top-[18vh] md:w-[46vw] md:h-[64vh]">
+            <OptimizedImage
+              src="/images/1000236050_convert_7.webp"
+              alt="Traditional clay stove farm-to-table cooking at The Peepal organic farm stay"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              {...getResponsiveImageSources('/images/1000236050_convert_7.webp', '(max-width: 768px) 92vw, 46vw')}
+            />
+          </div>
+          <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card" />
+          <div className="md:absolute md:left-[58vw] md:top-[24vh] md:w-[32vw]">
+            <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
+              Food Cooked<br />
+              <span className="text-[#C8A45C]">With Fire</span><br />
+              And Love
+            </h2>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[48vh] md:w-[32vw]">
+            <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+              Most meals come from the farm. Spices are local. Recipes are traditional.
+              The stove is wood-fired—and the flavor is real.
+            </p>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[62vh] md:w-[32vw]">
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm md:text-base">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Ask about meals
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Section 6: Hosts */}
       <section id="hosts" className="section-pinned bg-[#F4F1EA] dark:bg-[#0a1f19] z-[60]">
-        <div className="absolute left-[4vw] md:left-[6vw] top-[14vh] md:top-[18vh] w-[92vw] md:w-[46vw] h-[32vh] md:h-[64vh] image-card hosts-image">
-          <OptimizedImage
-            src="/images/founder.png"
-            alt="The Peepal Farm Stay founders in organic farming field practicing sustainable agriculture"
-            className="w-full h-full object-cover"
-            loading="lazy"
-            {...getResponsiveImageSources('/images/founder.png', '(max-width: 768px) 92vw, 46vw')}
-          />
-        </div>
-        <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card hosts-card" />
-        <div className="absolute left-[4vw] md:left-[58vw] top-[48vh] md:top-[24vh] w-[92vw] md:w-[32vw] hosts-headline hosts-text">
-          <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
-            Your Hosts<br />
-            <span className="text-[#C8A45C]">Live What</span><br />
-            They Love
-          </h2>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[60vh] md:top-[48vh] w-[92vw] md:w-[32vw] hosts-body hosts-text">
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-            <strong className="text-foreground">Dr. Sunita Jha</strong> (Ayurvedic Doctor) and <strong className="text-foreground">Aditya Kumar</strong> (Engineer) 
-            built this place to share a slower, more intentional life.
-          </p>
-        </div>
-        <div className="absolute left-[4vw] md:left-[58vw] top-[70vh] md:top-[62vh] w-[92vw] md:w-[32vw] hosts-cta hosts-text">
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm md:text-base">
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Chat with hosts
-          </a>
+        <div className="flex flex-col gap-6 px-4 py-12 md:block md:p-0">
+          <div className="w-full h-[32vh] image-card md:absolute md:left-[6vw] md:top-[18vh] md:w-[46vw] md:h-[64vh]">
+            <OptimizedImage
+              src="/images/founder.jpg"
+              alt="The Peepal Farm Stay founders in organic farming field practicing sustainable agriculture"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              {...getResponsiveImageSources('/images/founder.jpg', '(max-width: 768px) 92vw, 46vw')}
+            />
+          </div>
+          <div className="hidden md:block absolute left-[54vw] top-[18vh] w-[40vw] h-[64vh] paper-card" />
+          <div className="md:absolute md:left-[58vw] md:top-[24vh] md:w-[32vw]">
+            <h2 className="heading-display text-[clamp(1.8rem,6vw,3rem)] md:text-[clamp(2rem,3vw,3rem)]">
+              Your Hosts<br />
+              <span className="text-[#C8A45C]">Live What</span><br />
+              They Love
+            </h2>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[48vh] md:w-[32vw]">
+            <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+              <strong className="text-foreground">Dr. Sunita Jha</strong> (Ayurvedic Doctor) and <strong className="text-foreground">Aditya Kumar</strong> (Engineer)
+              built this place to share a slower, more intentional life.
+            </p>
+          </div>
+          <div className="md:absolute md:left-[58vw] md:top-[62vh] md:w-[32vw]">
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm md:text-base">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Chat with hosts
+            </a>
+          </div>
         </div>
       </section>
 
@@ -942,11 +952,11 @@ function HomePage() {
       {/* Section 7: Location */}
       <section id="location" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-[70]">
         <div className="px-4 md:px-[6vw]">
-          <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] location-animate mb-4 md:mb-6">
+          <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] mb-4 md:mb-6">
             Location
           </h2>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
-            <div className="location-animate">
+            <div>
               <p className="text-muted-foreground leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
                 A short drive from Nashik, far enough to feel like an escape. 
                 Easy road access, parking available.
@@ -970,7 +980,7 @@ function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="paper-card p-4 md:p-6 location-animate">
+            <div className="paper-card p-4 md:p-6">
               <h3 className="heading-display text-base md:text-lg mb-3 md:mb-4">Contact Us</h3>
               <div className="space-y-2 md:space-y-3 text-sm text-muted-foreground">
                 <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-2 hover:text-[#C8A45C] transition-colors">
@@ -992,7 +1002,7 @@ function HomePage() {
             href={LOCATION_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full h-[30vh] md:h-[46vh] image-card location-animate overflow-hidden relative group"
+            className="block w-full h-[30vh] md:h-[46vh] image-card overflow-hidden relative group"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2897.3195721230472!2d73.73496774469422!3d20.06011258953759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddef3ed1abd6b1%3A0xa6c96c21cf2bc2b9!2sThe%20Peepal!5e0!3m2!1sen!2sus!4v1769969381415!5m2!1sen!2sus"
@@ -1017,7 +1027,7 @@ function HomePage() {
       {/* Section 8: Reviews */}
       <section id="reviews" className="relative bg-[#F4F1EA] dark:bg-[#0a1f19] py-16 md:py-20 z-[80]">
         <div className="px-4 md:px-[6vw]">
-          <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] reviews-animate mb-8 md:mb-12">
+          <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] mb-8 md:mb-12">
             Guest Stories
           </h2>
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
@@ -1038,7 +1048,7 @@ function HomePage() {
                 rating: 5
               }
             ].map((review, index) => (
-              <div key={index} className="paper-card p-4 md:p-6 reviews-animate">
+              <div key={index} className="paper-card p-4 md:p-6">
                 <div className="flex gap-1 mb-3 md:mb-4">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-[#C8A45C] text-[#C8A45C]" />
@@ -1056,7 +1066,7 @@ function HomePage() {
       <section id="booking" className="relative bg-[#0E3A2F] py-16 md:py-20 z-[90]">
         <div className="px-4 md:px-[6vw]">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="image-card booking-animate">
+            <div className="image-card">
               <OptimizedImage
                 src="/images/gallery-1.webp"
                 alt="Peaceful farm landscape and eco-retreat at The Peepal Farm Stay near Nashik Airport"
@@ -1066,14 +1076,14 @@ function HomePage() {
               />
             </div>
             <div>
-              <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] text-white booking-animate mb-4 md:mb-6">
+              <h2 className="heading-display text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,4vw,4rem)] text-white mb-4 md:mb-6">
                 Book Your Stay
               </h2>
-              <p className="text-white/80 leading-relaxed booking-animate mb-6 md:mb-8 text-sm md:text-base">
+              <p className="text-white/80 leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
                 Weekends fill up fast. Reserve early to lock in your dates and experience 
                 the magic of sustainable farm living.
               </p>
-              <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 booking-animate">
+              <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
                 <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-3 md:gap-4 text-white/80 hover:text-white transition-colors">
                   <Phone className="w-4 h-4 md:w-5 md:h-5 text-[#C8A45C]" />
                   <span className="text-sm md:text-base">{PHONE_NUMBER}</span>
@@ -1087,7 +1097,7 @@ function HomePage() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary booking-animate inline-flex"
+                className="btn-primary inline-flex"
               >
                 <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                 Book on WhatsApp
